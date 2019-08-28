@@ -21,7 +21,7 @@ app.use(methodOverride("_method"));
 app.use(flash());
 
 var dbUrl = process.env.DATABASEURL || "mongodb://localhost:27017/yelp_camp_db";
-mongoose.connect(dbUrl, {useNewUrlParser: true});
+mongoose.connect(dbUrl);
 
 
 
