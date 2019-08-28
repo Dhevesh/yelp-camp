@@ -19,9 +19,9 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
-
-var dbUrl = process.env.DATABASEURL || "mongodb://localhost:27017/yelp_camp_db";
-mongoose.connect(dbUrl);
+var dbUrl = "mongodb+srv://sa:VhuXawHpb5muSAKI@webapps-4mdox.mongodb.net/test?retryWrites=true&w=majority"
+//var dbUrl = process.env.DATABASEURL || "mongodb://localhost:27017/yelp_camp_db";
+mongoose.connect(dbUrl, { useNewUrlParser : true } );
 
 
 
@@ -59,6 +59,6 @@ app.get("*",(req,res)=>{
 });
 
 // Server Listener
-app.listen(process.env.PORT, process.env.IP, ()=>{
+app.listen(3000, process.env.IP, ()=>{
 	console.log("Yelp Camp started on port 3000");
 });
