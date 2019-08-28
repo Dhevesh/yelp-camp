@@ -1,0 +1,10 @@
+<%include ../partials/header%>
+<h1>Welcome to the Profile Page</h1>
+<a href="/user/<%=currentUser._id%>/edit">Update Profile</a>
+<% if (!user){ %>
+    <div>You have not setup up your profile yet. Click below to setup.</div>
+    
+<%} else{ %>
+    <%=user.fName%>
+<%} %>
+<%include ../partials/footer%>

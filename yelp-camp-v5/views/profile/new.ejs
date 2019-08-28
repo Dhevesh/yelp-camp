@@ -1,0 +1,43 @@
+<% include ../partials/header%>
+<div class="container">
+    <h1>Create a shiny new profile!</h1>
+
+
+<div class="form-narrow"">
+    <form action="/user/id/new" method="POST" class="form">
+        <div class="form-group">
+            <input class="form-control" type="text" name="profile[fName]" placeholder="First Name">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="profile[lName]" placeholder="Last Name">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="date" name="profile[dateOfBirth]">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="profile[gender]" placeholder="Gender">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name=profile[profilePicUrl] placeholder="Profile Picture URL">
+        </div>        
+        <div class="form-group">
+            <input class="form-control" type="text" name=profile[about] placeholder="About">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name=profile[phone] placeholder="Phone">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name=profile[country] placeholder="Country">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name=profile[interests] placeholder="Interests">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary">Update Profile</button>
+        </div>
+        
+    </form>
+</div>
+</div>
+
+<% include ../partials/footer%>

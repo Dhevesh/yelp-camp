@@ -1,0 +1,26 @@
+.thumbnail img {
+    width: 100%;
+}
+
+.thumbnail{
+    padding: 0;
+}
+
+.delete-form{
+    display: inline;
+}
+
+.form-narrow{
+    width:30%; 
+    margin:25px auto;
+}
+
+.card-head-text{
+    font-size: 1.5rem;
+}
+
+.img-medium{
+    height: 18rem;
+    max-width: 100%;
+    max-height: 100%;
+}

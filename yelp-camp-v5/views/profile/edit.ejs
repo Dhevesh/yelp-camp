@@ -1,0 +1,39 @@
+<% include ../partials/header%>
+<div class="form-narrow">
+    <span><h1>Update your profile details</h1></span>
+    <form action="/user/<%=user.userId.id%>/edit?_method=PUT" method="POST" class="form">
+        <div class="form-group">
+            <input class="form-control" type="text" name="profile[fName]" value="<%=user.fName%>">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="profile[lName]" value="<%=user.lName%>">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="date" name="profile[dateOfBirth]">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="profile[gender]" value="<%=user.gender%>">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name=profile[profilePicUrl] value="<%=user.profilePicUrl%>">
+        </div>        
+        <div class="form-group">
+            <input class="form-control" type="text" name=profile[about]  value="<%=user.about%>">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name=profile[phone]  value="<%=user.phone%>">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name=profile[country] value="<%=user.country%>">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name=profile[interests]  value="<%=user.interests%>">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary">Update Profile</button>
+        </div>
+        
+    </form>
+</div>
+
+<% include ../partials/footer%>
