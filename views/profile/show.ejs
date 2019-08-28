@@ -1,10 +1,36 @@
 <%include ../partials/header%>
-<h1>Welcome to the Profile Page</h1>
-<a href="/user/<%=currentUser._id%>/edit">Update Profile</a>
-<% if (!user){ %>
-    <div>You have not setup up your profile yet. Click below to setup.</div>
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <div>
+                <img class="rounded-circle rounded-sm img-thumbnail" src="<%=user.profilePicUrl %>" alt="image.png">
+            </div>
+        </div>
+        <div class="col-6">
+            <div><%=user.fName%></div>
+            <div><%=user.lName%></div>
+            <div><%=user.dateOfBirth%></div>
+            <div><%=user.gender %></div>
+            <div><%=user.phone %></div>
+            <div><%=user.country %></div>
+            
+            <a href="/user/<%=currentUser._id%>/edit" class="btn btn-sm btn-primary">Update Profile</a>
+            <a href=""><-Back</a>
+        </div>
+        <div class="col-3">
+            <div>
+                <h5>About Me:</h5>
+                <p><%=user.about %></p>
+            </div>
+            <div>
+                What interests me?
+                <p>
+                    <%=user.interests %>
+                </p>
+            </div>
+        </div>
+    </div>
     
-<%} else{ %>
-    <%=user.fName%>
-<%} %>
+</div>
+
 <%include ../partials/footer%>

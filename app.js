@@ -57,6 +57,7 @@ app.get("*",(req,res)=>{
 });
 
 // Server Listener
-app.listen(process.env.PORT, process.env.IP, ()=>{
-	console.log("Yelp Camp started on PORT: ", process.env.PORT);
+var envPort = process.env.PORT || "3000";
+app.listen(envPort, process.env.IP, ()=>{
+	console.log("Yelp Camp started on PORT: ", envPort);
 });
