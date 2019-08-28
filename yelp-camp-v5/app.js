@@ -8,7 +8,7 @@ const methodOverride = require("method-override");
 const flash = require("connect-flash");
 
 const User = require("./models/users");
-const seed = require("./seed");
+const seed = require("./seed"); //for testing purposes. seed the db with dummy data.
 const indexRoutes = require("./controllers/index");
 const campgroundRoutes = require("./controllers/campgrounds");
 const commentRoutes = require("./controllers/comments");
@@ -19,9 +19,11 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
-mongoose.connect("mongodb://localhost:27017/yelp_camp_db", {useNewUrlParser: true});
 
-//seed();
+var dbUrl = process.env.DATABASEURL || "mongodb://localhost:27017/yelp_camp_db";
+mongoose.connect(dbUrl, {useNewUrlParser: true});
+
+
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
