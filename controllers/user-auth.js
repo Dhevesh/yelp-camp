@@ -52,6 +52,8 @@ middlewareObj.isUserProfile = function(req, res, next){
 			res.redirect("/user/" + req.user._id);
 		}
 	} else{
+		req.session.redirectTo = req.originalUrl;
+		req.flash("error", "You need to login first!");
 		res.redirect("/login");
 	}
 };
