@@ -28,3 +28,11 @@
 .close:focus{
     outline: none;
 }
+
+.footer-custom{
+    padding-top: 5px;
+    background-color: rgb(8, 168, 88);
+    color: rgb(228, 228, 228);
+    text-align: center;
+    line-height: 0.7cm;
+}
