@@ -1,6 +1,6 @@
 <%include partials/header%>
-<div class="form-narrow">
-    <h1>Log In to Yelp Camp</h1>
+<div class="form-narrow shadow-sm p-3 mb-5 bg-white rounded">
+    <h1>Log In</h1>
     <form action="/login" method="POST">
         <div class="form-group">
             <input class="form-control" type="text" name="username" placeholder="username">    
@@ -8,8 +8,11 @@
         <div class="form-group">
             <input class="form-control" type="password" name="password" placeholder="password">
         </div>
-        <button>Create Account</button>
+        <button class="btn btn-block btn-lg btn-success">Login</button>
     </form>
+    <div>
+        <span class="form-narrow-subtitle">Don't have an account yet?</span><a href="/register">Sign Up</a>
+    </div>
 </div>
 
 <%include partials/footer%>
