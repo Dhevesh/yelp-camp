@@ -76,3 +76,18 @@
     line-height: 0.7cm;
     padding-bottom: 5px;
 }
+
+.time{
+    font-size: 0.8rem;
+    font-style: italic;
+    padding-left: 2px;
+}
+
+button{
+    border: 0;
+    background: none;
+}
+
+button:focus{
+    outline: none;
+}
