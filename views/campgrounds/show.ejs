@@ -1,5 +1,5 @@
 <%include ../partials/header%>
-<div class="container">
+<div class="container pt-4">
 	<div class="row">
 		<div class="col-3">
 			<p class="lead">Yelp Camp</p>
@@ -14,14 +14,16 @@
 				<img class="card-img-top" src="<%=campground.image%>">
 				<div class="card-header">
 					<span class="card-head-text"><a href=""><%=campground.name%></a></span>
-					<div class="float-right"><h6>$9.00</h6></div>
+					<div class="float-right"><h6><%=campground.price%>/night</h6></div>
+					<div>
+						<span>Post by: <%=campground.author.name%></span><span class="time"> - <%=moment(campground.dateAdded).fromNow()%></span>
+					</div>
 				</div>
 				<div class="card-body">
-					<h5>Posted by: <%=campground.author.name%></h5>
 					<% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
-						<a class="btn btn-sm btn-warning" href="/campgrounds/<%=campground._id%>/edit">Edit</a>
+						<a href="/campgrounds/<%=campground._id%>/edit"><span><i class="far fa-edit"></i></span></a>
 						<form class="delete-form" action="/campgrounds/<%=campground._id%>/delete?_method=DELETE" method="POST">
-							<button class="btn btn-sm btn-danger">Delete</button>
+							<button><span><i class="far fa-trash-alt"></i></span></button>
 						</form>
 					<% } %>
 					
@@ -41,13 +43,17 @@
 						<div class="row">
 							<div class="col-12">
 								<strong><%=comment.author.name%></strong>
-								<span class="pull-right">10 days ago</span>
+								<span class="pull-right time">
+									<%=moment(comment.dateAdded).fromNow()%>
+								</span>
+								<div>
 								<% if (currentUser && comment.author.id.equals(currentUser._id)){ %>
-									<a class="btn btn-sm btn-warning" href="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>/edit">Edit</a>
+									<a href="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>/edit"><span><i class="far fa-edit"></i></span></a>
 									<form class="delete-form" action="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
-										<button class="btn btn-sm btn-danger">Delete</button>
+										<button><span><i class="far fa-trash-alt"></i></span></button>
 									</form>
 								<% }; %>
+								</div>
 								<p>
 									<%=comment.text%>
 								</p>

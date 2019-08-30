@@ -1,18 +1,18 @@
 <%include ../partials/header%>
 	<div class="jumbotron">
-		<div class="container">
-			<h1>
-				Welcome to Yelp Camp
-			</h1>
-			<p>
+		<div class="d-flex flex-row">
+		<div class="container w-100 text-center">
+			<div>
+				<h1>Welcome to Yelp! Camp</h1>
+			</div>
+			<div>
 				View hand-picked campgrounds from all over the world
-			</p>
-			<% if (currentUser){ %>
-				<p>
-					<a class="btn btn-primary btn-lg" href="/campgrounds/new">Add New Campground</a>
-				</p>
-			<% } %>
-			
+			</div>
+			<hr class="jumbotron-hr">
+			<div>
+				<a class="btn btn-success btn-lg" href="/campgrounds/new"><span>New Campground</a>
+			</div>
+		</div>
 		</div>
 	</div>
 	<div class="container">
