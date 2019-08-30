@@ -17,7 +17,8 @@ const campgroundSchema = new mongoose.Schema({
 			ref: "User"
 		},
 		name: String
-	}
+	},
+	dateAdded: { type: Date, default : Date.now}
 });
 
 campgroundSchema.pre('remove', async function(next) {

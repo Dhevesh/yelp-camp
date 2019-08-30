@@ -19,6 +19,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
+app.locals.moment = require("moment");
 var dbUrl = process.env.DATABASEURL || "mongodb://localhost:27017/yelp_camp_db";
 mongoose.connect(dbUrl, { useNewUrlParser : true } );
 
