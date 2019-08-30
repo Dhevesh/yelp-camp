@@ -50,14 +50,25 @@
     
 }
 
+.card{
+    width: 100%;
+    max-width: 100%;
+}
+
 .card-head-text{
     font-size: 1.5rem;
 }
 
 .img-medium{
     height: 18rem;
-    max-width: 100%;
     max-height: 100%;
+    max-width: 100%;
+}
+
+.img-large{
+    height: 26rem;
+    max-height: 100%;
+    max-width: 100%;
 }
 
 .close:focus{
