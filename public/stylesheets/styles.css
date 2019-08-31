@@ -1,3 +1,7 @@
+.container-padding{
+    padding-bottom: 200px;
+}
+
 .thumbnail img {
     width: 100%;
 }
@@ -65,6 +69,7 @@
 }
 
 .footer-custom{
+    height: 200px;
     padding-top: 5px;
     background-color: rgb(8, 168, 88);
     color: rgb(228, 228, 228);
