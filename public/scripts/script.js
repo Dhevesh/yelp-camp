@@ -4,5 +4,3 @@ $(function(){
       $nav.toggleClass("fixed-bottom", $(this).scrollTop()<$nav.height());
     });
 });
-
-
