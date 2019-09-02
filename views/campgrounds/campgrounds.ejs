@@ -2,10 +2,10 @@
 	<div class="jumbotron">
 		<div class="d-flex flex-row">
 		<div class="container w-100 text-center">
-			<div>
+			<div class="jumbotron-text">
 				<h1>Welcome to Yelp! Camp</h1>
 			</div>
-			<div>
+			<div class="jumbotron-text">
 				View hand-picked campgrounds from all over the world
 			</div>
 			<hr class="jumbotron-hr">
@@ -25,7 +25,6 @@
 							<h5 class="card-head-text font-sm font-md"><%=campground.name%></h5>
 						</div>	
 						<div class="card-body">
-							
 							<p class="card-text"><%=campground.description.substring(0,100)%>...</p>
 							<a href="/campgrounds/<%=campground._id%>">continue reading</a>
 						</div>

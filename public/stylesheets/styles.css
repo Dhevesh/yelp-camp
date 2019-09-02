@@ -1,7 +1,18 @@
+.jumbotron{
+    background-image: url("https://images.unsplash.com/photo-1532309975451-db55af55d385?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .jumbotron-hr{
     border: 0;
     height: 1px;
     background-image: linear-gradient(to right, rgba(0, 100, 0, 0), rgba(0, 200, 100, 0.75), rgba(0, 100, 0, 0));
+}
+
+.jumbotron-text{
+    color: #fff;
+    text-shadow: 0px 5px 5px green;
 }
 
 .thumbnail img {
@@ -109,8 +120,9 @@ button:focus{
 
 @media (min-width : 576px){
     .card-scale{
-    width: 12rem;
+    width: 16rem;
     max-width: 100%;
+    height: 24rem;
     max-height: 100%;
     }
 
@@ -121,16 +133,15 @@ button:focus{
 
 @media (min-width: 768px){
     .card-scale{
-        width: 18rem;
+        width: 20rem;
         max-width: 100%;
+        height: 26rem;
         max-height: 100%;
     }
 
     .font-sm{
         font-size: 1.2rem;
     }
-
-
 }
 
 @media (min-width: 992px){
@@ -141,10 +152,8 @@ button:focus{
     }
 
     .font-sm{
-        font-size: 1.3rem;
+        font-size: 1.1rem;
     }
-
-    
 }
 
 @media (min-width: 1200px){
@@ -152,5 +161,9 @@ button:focus{
         width: 30rem;
         max-width: 100%;
         max-height: 100%;
+    }
+
+    .font-sm{
+        font-size: 1.3;
     }
 }
