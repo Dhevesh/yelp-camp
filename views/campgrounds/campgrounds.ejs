@@ -25,6 +25,13 @@
 							<h5 class="card-head-text font-sm font-md"><%=campground.name%></h5>
 							<span class="badge badge-success"><%=campground.likes.length%></span>
 							<span class="badge badge-danger"><%=campground.dislikes.length%></span>
+							<span>
+								<%if (campground.comments.length === 0){ %>
+									No reviews yet
+								<%} else{ %>
+									<%=campground.comments.length%> reviews
+								<%} %>
+							</span>
 						</div>	
 						<div class="card-body">
 							<p class="card-text mb-0 pb-0"><%=campground.description.substring(0,100)%>...</p>
