@@ -20,14 +20,11 @@
 					</div>
 					<div>
 						<form method="POST">
-							<button type="submit" formaction="/campgrounds/<%=campground._id%>/like">
-								<span><i class="fas fa-thumbs-up"></i></span>
-								<span class="badge badge-success"><%=campground.likes.length%></span>
+							<button id="likeButton" type="submit" formaction="/campgrounds/<%=campground._id%>/like">
+								<span id="likeSpan" class="badge badge-pill badge-secondary"><span class="px-2"><%=campground.likes.length%></span><i class="fas fa-thumbs-up p-1"></i></span>
 							</button>
-							<button type="submit" formaction="/campgrounds/<%=campground._id%>/dislike">
-								<span><i class="fas fa-thumbs-down"></i></span>
-								<span class="badge badge-danger"><%=campground.dislikes.length%></span>
-								
+							<button id="dislikeButton" type="submit" formaction="/campgrounds/<%=campground._id%>/dislike">
+								<span id="dislikeSpan" class="badge badge-pill badge-secondary"><i class="fas fa-thumbs-down p-1"></i><span class="px-2"><%=campground.dislikes.length%></span></span>
 							</button>
 						</form>
 					</div>
@@ -60,7 +57,12 @@
 									<%=moment(comment.dateAdded).fromNow()%>
 								</span>
 								<div>
-									User since: <%=moment(currentUser.created).format("MMM YYYY")%>
+									<%for (i = 0; i < author.length; i ++){ %>
+										<%if (author[i].id == comment.author.id){ %>
+											User since: <%=moment(author[i].created).format("MMM YYYY")%>
+										<%} %>
+										
+									<%} %>
 								</div>
 								<div>
 									Posts: 3	

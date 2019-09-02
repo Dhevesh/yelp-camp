@@ -42,14 +42,24 @@ router.post("/",isAuthUser.isLoggedIn,(req,res)=>{
 // SHOW - shows more info about one campground
 
 router.get("/:id",(req,res)=>{
-	Campground.findById(req.params.id).populate("comments").exec((err,result)=>{
+	User.find((err, foundUsers)=>{
+		console.log(foundUsers);
 		if (!err){
-			res.render("campgrounds/show",{campground:result});		
-		}else{
-			console.log("campground not found");
+			Campground.findById(req.params.id).populate("comments").exec((err,result)=>{
+				if (!err){
+					res.render("campgrounds/show",{campground:result, author : foundUsers});		
+				}else{
+					console.log("campground not found");
+					console.log(err);
+					res.redirect("/campgrounds");
+				}
+			});
+		} else {
 			console.log(err);
+			res.redirect("/campgrounds");
 		}
-	});
+	})
+	
 });
 
 // EDIT ROUTE

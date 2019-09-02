@@ -5,4 +5,6 @@
 //     });
 // });
 
-
+$("#likeButton").on("click", function(){
+    $("#likeSpan").toggleClass("badge-success");
+});
