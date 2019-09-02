@@ -16,8 +16,22 @@
 					<span class="card-head-text"><a href=""><%=campground.name%></a></span>
 					<div class="float-right"><h6><%=campground.price%>/night</h6></div>
 					<div>
-						<span>Post by: <%=campground.author.name%></span><span class="time"> - <%=moment(campground.dateAdded).fromNow()%></span>
+						<span class="time">Submitted by : <%=campground.author.name%></span><span class="time"> - <%=moment(campground.dateAdded).fromNow()%></span>
 					</div>
+					<div>
+						<form method="POST">
+							<button type="submit" formaction="/campgrounds/<%=campground._id%>/like">
+								<span><i class="fas fa-thumbs-up"></i></span>
+								<span class="badge badge-success"><%=campground.likes.length%></span>
+							</button>
+							<button type="submit" formaction="/campgrounds/<%=campground._id%>/dislike">
+								<span><i class="fas fa-thumbs-down"></i></span>
+								<span class="badge badge-danger"><%=campground.dislikes.length%></span>
+								
+							</button>
+						</form>
+					</div>
+						
 				</div>
 				<div class="card-body">
 					<% if(currentUser && campground.author.id.equals(currentUser._id)){ %>

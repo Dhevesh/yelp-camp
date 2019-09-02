@@ -1,5 +1,7 @@
 .jumbotron{
-    background-image: url("https://images.unsplash.com/photo-1532309975451-db55af55d385?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80");
+    /* background-image: url("https://images.unsplash.com/photo-1532309975451-db55af55d385?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80"); */
+    /* background-image: url("https://images.unsplash.com/photo-1503265192943-9d7eea6fc77a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80"); */
+    background-image: url("https://images.unsplash.com/photo-1535576434247-e0f50b766399?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -12,7 +14,7 @@
 
 .jumbotron-text{
     color: #fff;
-    text-shadow: 0px 5px 5px green;
+    /* text-shadow: 0px 5px 5px green; */
 }
 
 .thumbnail img {
@@ -58,13 +60,6 @@
 .form-subtitle{
     text-align: center;
     padding-top: 20px;
-}
-
-.fa-user-plus{
-    padding-top: 10px;
-    padding-left: 10px;
-    font-size: 2em;
-    
 }
 
 .card-head-text{
@@ -116,6 +111,17 @@ button{
 
 button:focus{
     outline: none;
+}
+
+/* External ICON class updates */
+.fa-user-plus{
+    padding-top: 10px;
+    padding-left: 10px;
+    font-size: 2em;
+}
+
+.fa-thumbs-down{
+    transform: scaleX(-1);
 }
 
 @media (min-width : 576px){

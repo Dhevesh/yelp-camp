@@ -23,6 +23,8 @@
 						<img class="card-img-top" src="<%=campground.image%>" alt="image.png">
 						<div class="card-header">
 							<h5 class="card-head-text font-sm font-md"><%=campground.name%></h5>
+							<span class="badge badge-success"><%=campground.likes.length%></span>
+							<span class="badge badge-danger"><%=campground.dislikes.length%></span>
 						</div>	
 						<div class="card-body">
 							<p class="card-text"><%=campground.description.substring(0,100)%>...</p>

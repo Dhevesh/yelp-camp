@@ -89,4 +89,80 @@ router.delete("/:id/delete", isAuthUser.isCampAuth, (req,res)=>{
 	});
 });
 
+
+/*BELOW NEEDS TO BE REFACTORED TO WORK IF A USER TRIES TO LIKE OR DISLIKE WHILST NOT LOGGED IN
+CURRENTLY YOU ARE REDIRECTED TO THE LOGIN PAGE ONCE YOU LOGIN YOU LIKE OR DISLIKE IS NOT COUNTED AND YOU HAVE TO
+PRESS THE BUTTON AGAIN */
+// LIKE ROUTE
+router.get("/:id/like", (req, res)=>{
+	res.redirect("/campgrounds/" + req.params.id);
+});
+router.post("/:id/like", isAuthUser.isLoggedIn, (req, res)=>{
+	Campground.findById(req.params.id, (err, foundCampground)=>{
+		if (!err){
+			var foundUserLike = foundCampground.likes.some(function (like){
+				return like.equals(req.user._id);
+			});
+			var foundUserDislike = foundCampground.dislikes.some(function(dislike){
+				return dislike.equals(req.user._id);
+			})
+			if (foundUserLike){
+				foundCampground.likes.pull(req.user._id);
+			} else{
+				foundCampground.likes.push(req.user._id);
+			}
+			if (foundUserDislike){
+				foundCampground.dislikes.pull(req.user._id);
+			} 
+			foundCampground.save(function (err){
+				if (!err){
+					return res.redirect("/campgrounds/" + foundCampground._id);
+				} else{
+					console.log(err);
+					return res.redirect("/campgrounds");
+				}
+			});
+		} else{
+			console.log(err);
+			res.redirect("/campgrounds");
+		}
+	});
+});
+
+// DISKLIKE ROUTE
+router.get("/:id/disklike", (req, res)=>{
+	res.redirect("/campgrounds" + req.params.id);
+});
+router.post("/:id/dislike", isAuthUser.isLoggedIn, (req, res)=>{
+	Campground.findById(req.params.id, (err, foundCampground)=>{
+		if (!err){
+			var foundUserDislike = foundCampground.dislikes.some(function (like){
+				return like.equals(req.user._id);
+			});
+			var foundUserLike = foundCampground.likes.some(function(like){
+				return like.equals(req.user._id);
+			});
+			if (foundUserDislike){
+				foundCampground.dislikes.pull(req.user._id);
+			} else{
+				foundCampground.dislikes.push(req.user._id);
+			}
+			if (foundUserLike){
+				foundCampground.likes.pull(req.user._id);
+			}
+			foundCampground.save(function (err){
+				if (!err){
+					return res.redirect("/campgrounds/" + foundCampground._id);
+				} else{
+					console.log(err);
+					return res.redirect("/campgrounds");
+				}
+			});
+		} else{
+			console.log(err);
+			res.redirect("/campgrounds");
+		}
+	});
+});
+
 module.exports = router;
