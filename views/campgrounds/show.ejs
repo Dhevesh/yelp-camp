@@ -54,11 +54,20 @@
 				<% } else { %>
 					<%campground.comments.forEach((comment)=>{%>
 						<div class="row">
-							<div class="col-12">
+							<div class="col-4"> <!--review author-->
 								<strong><%=comment.author.name%></strong>
 								<span class="pull-right time">
 									<%=moment(comment.dateAdded).fromNow()%>
 								</span>
+								<div>
+									User since: <%=moment(currentUser.created).format("MMM YYYY")%>
+								</div>
+								<div>
+									Posts: 3	
+								</div>
+								<div>
+									Reviews: 20
+								</div>
 								<div>
 								<% if (currentUser && comment.author.id.equals(currentUser._id)){ %>
 									<a href="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>/edit"><span><i class="far fa-edit"></i></span></a>
@@ -67,14 +76,20 @@
 									</form>
 								<% }; %>
 								</div>
+								
+							</div>
+							<div class="col-4"> <!--review body-->
 								<p>
 									<%=comment.text%>
 								</p>
 							</div>
+							<div class="col-4 text-right"> <!--camp rating-->
+								Rating: 5 Stars
+							</div>
 						</div>
 					<%})%>
 				<%} %>
-			</div>
+			</div> <!--comments div end-->
 		</div>
 	</div>
 </div>

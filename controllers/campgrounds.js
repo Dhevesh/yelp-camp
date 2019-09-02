@@ -3,6 +3,7 @@ const router = express.Router();
 
 const Campground = require("../models/campgrounds");
 const isAuthUser = require("../controllers/user-auth");
+const User = require("../models/users");
 
 router.get("/",(req,res)=>{
 	Campground.find((err,result)=>{
@@ -14,7 +15,6 @@ router.get("/",(req,res)=>{
 			res.redirect("/erropage");
 		}
 	});
-	
 });
 
 // NEW - Displays a form to add new campgrounds
@@ -50,7 +50,6 @@ router.get("/:id",(req,res)=>{
 			console.log(err);
 		}
 	});
-	
 });
 
 // EDIT ROUTE
