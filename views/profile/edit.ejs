@@ -1,7 +1,7 @@
 <% include ../partials/header%>
 <div class="form-narrow">
     <span><h1>Update your profile details</h1></span>
-    <form action="/user/<%=user.userId.id%>/edit?_method=PUT" method="POST" class="form">
+    <form action="/user/<%=user._id%>/edit?_method=PUT" method="POST" class="form">
         <div class="form-group">
             <input class="form-control" type="text" name="profile[fName]" value="<%=user.fName%>">
         </div>
