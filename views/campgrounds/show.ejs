@@ -60,7 +60,11 @@
 								</div>
 									<%for (i = 0; i < author.length; i ++){ %>
 										<%if (author[i].id == comment.author.id){ %>
-											<div class="user-pic"><img src="" alt="user.png"></div>
+											<div>
+												<% if (author[i].profilePicUrl){ %>
+													<img class="user-pic" src="<%=author[i].profilePicUrl%>" alt="user.png">
+												<% } %>
+											</div>
 											<div>
 												User since: <%=moment(author[i].created).format("MMM YYYY")%>
 											</div>
