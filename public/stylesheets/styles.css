@@ -1,6 +1,4 @@
 .jumbotron{
-    /* background-image: url("https://images.unsplash.com/photo-1532309975451-db55af55d385?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80"); */
-    /* background-image: url("https://images.unsplash.com/photo-1503265192943-9d7eea6fc77a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80"); */
     background-image: url("https://images.unsplash.com/photo-1535576434247-e0f50b766399?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80");
     background-repeat: no-repeat;
     background-size: cover;
@@ -111,6 +109,11 @@ button{
 
 button:focus{
     outline: none;
+}
+
+.user-pic{
+    width: 100px;
+    max-width: 100%;
 }
 
 /* External ICON class updates */
