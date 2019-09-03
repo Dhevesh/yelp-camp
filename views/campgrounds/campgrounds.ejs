@@ -28,6 +28,8 @@
 							<span>
 								<%if (campground.comments.length === 0){ %>
 									No reviews yet
+								<%} else if (campground.comments.length === 1){ %>
+									1 review
 								<%} else{ %>
 									<%=campground.comments.length%> reviews
 								<%} %>
