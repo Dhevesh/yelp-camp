@@ -44,6 +44,22 @@
   
 }
 
+.form-narrow-long{
+    height: 100%;
+    max-height: 100%;
+    margin-right: 0;
+}
+
+.form-wide{
+    width: 500px;
+    max-width: 100%;
+}
+
+.form-wide-long{
+    height: 100%;
+    max-height: 100%;
+}
+
 .form-title{
     text-align: center;
     background-color: rgba(0,150,50,0.8);
@@ -114,6 +130,10 @@ button:focus{
 .user-pic{
     width: 100px;
     max-width: 100%;
+}
+
+.user-icon{
+    font-size: 8rem;
 }
 
 /* External ICON class updates */

@@ -5,10 +5,9 @@
         <button>Create Profile</button>
     </div>
 <%} else{ %>
-
-<div class="container">
+    <div class="container">
     <div class="row">
-        <div class="col-3">
+        <div class="col-3 text-center">
             <div>
                 <%if (!user.profilePicUrl){ %>
                     <%user.profilePicUrl = "https://cdn2.iconfinder.com/data/icons/ui-1/60/05-512.png"%>
@@ -23,9 +22,9 @@
             <div><%=user.gender %></div>
             <div><%=user.phone %></div>
             <div><%=user.country %></div>
+            <div><a href="/user/<%=currentUser._id%>/edit" class="btn btn-sm btn-primary">Update Profile</a></div>
+            <div><a href="/campgrounds"><-Back</a></div>
             
-            <a href="/user/<%=currentUser._id%>/edit" class="btn btn-sm btn-primary">Update Profile</a>
-            <a href="/campgrounds"><-Back</a>
         </div>
         <div class="col-3">
             <div>
