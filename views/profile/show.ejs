@@ -14,8 +14,10 @@
                 <img class="rounded-circle profile-image img-thumbnail" src="<%=user.profilePicUrl %>" alt="image.png">
                 <span class="d-flex d-inline-flex profile-head-text"><%=user.fName%> <%=user.lName%></span>
             </div>
-            <% if (currentUser){ %>
+            <% if (currentUser) { %>
+                <% if (currentUser.id == user.id || currentUser.role == "admin") { %>
                 <div><a href="/user/<%=currentUser._id%>/edit" class="btn btn-sm btn-primary">Update Profile</a></div>
+                <% } %>
             <% } %>
         </div>
     <div class="row">
@@ -28,6 +30,8 @@
                     </div>
                     <hr>
                     <div>
+                        <% var isAdmin; if (user.role == "admin") { isAdmin = "badge-success" } else { isAdmin = "badge-secondary" } %>
+                        <div class="badge badge-pill <%=isAdmin%>"><%=user.role%></div>
                         <div>Joined: <%=moment(user.created).format("MMM YYYY")%></div>
                         <div>Posts: <%=user.posts.length %></div>
                         <div>Reviews: <%=user.reviews.length %></div>
