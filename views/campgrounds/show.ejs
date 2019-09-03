@@ -51,25 +51,25 @@
 				<% } else { %>
 					<%campground.comments.forEach((comment)=>{%>
 						<div class="row">
-							<div class="col-4"> <!--review author-->
+							<div class="col-4 pb-2"> <!--review author-->
 								<strong><%=comment.author.name%></strong>
 								<span class="pull-right time">
 									<%=moment(comment.dateAdded).fromNow()%>
 								</span>
-								<div>
 									<%for (i = 0; i < author.length; i ++){ %>
 										<%if (author[i].id == comment.author.id){ %>
-											User since: <%=moment(author[i].created).format("MMM YYYY")%>
+											<div>
+												User since: <%=moment(author[i].created).format("MMM YYYY")%>
+											</div>
+											<div>
+												Posts: <%=author[i].posts.length%>
+											</div>
+											<div>
+												Reviews: <%=author[i].reviews.length%>
+											</div>
+											
 										<%} %>
-										
 									<%} %>
-								</div>
-								<div>
-									Posts: 3	
-								</div>
-								<div>
-									Reviews: 20
-								</div>
 								<div>
 								<% if (currentUser && comment.author.id.equals(currentUser._id)){ %>
 									<a href="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>/edit"><span><i class="far fa-edit"></i></span></a>
@@ -80,12 +80,12 @@
 								</div>
 								
 							</div>
-							<div class="col-4"> <!--review body-->
+							<div class="col-4 pb-2"> <!--review body-->
 								<p>
 									<%=comment.text%>
 								</p>
 							</div>
-							<div class="col-4 text-right"> <!--camp rating-->
+							<div class="col-4 text-right pb-2"> <!--camp rating-->
 								Rating: 5 Stars
 							</div>
 						</div>

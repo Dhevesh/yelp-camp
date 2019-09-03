@@ -28,7 +28,14 @@ router.post("/",isAuthUser.isLoggedIn,(req,res)=>{
 		if (!err){
             newCampground.author.id = req.user._id;
             newCampground.author.name = req.user.username;
-            newCampground.save();
+			newCampground.save();
+			User.findById(req.user._id, (err, foundUser)=>{
+				if (!err){
+					foundUser.posts.push(newCampground._id);
+					foundUser.save();
+				} else { return next();}
+			});
+			req.flash("info","Campground added");
 			res.redirect("campgrounds/new");
 		}else{
 			console.log("error");
@@ -89,8 +96,21 @@ router.put("/:id", isAuthUser.isCampAuth, (req,res)=>{
 router.delete("/:id/delete", isAuthUser.isCampAuth, (req,res)=>{
 	Campground.findById(req.params.id, (err, campground)=>{
 		if (!err){
-			campground.remove();
-			res.redirect("/campgrounds");
+			User.findById(req.user._id, (err, foundUser)=>{
+				if (!err){
+					var foundPost = foundUser.posts.some(function (postId) {
+						return postId.equals(campground._id);
+					});
+					if (foundPost){
+						foundUser.posts.pull(campground._id); //NEEDS TO BE REFACTORED TO ACCOUNT FOR ADMIN USER DELETING THE POST
+					}
+					foundUser.save();
+					campground.remove();
+					res.redirect("/campgrounds");
+				} else{
+					res.redirect("/campgrounds");
+				}
+			});
 		} else {
 			console.log(err);
 			res.redirect("back");
