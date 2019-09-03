@@ -12,7 +12,7 @@
             <%}%>
             <div>
                 <img class="rounded-circle profile-image img-thumbnail" src="<%=user.profilePicUrl %>" alt="image.png">
-                <span class="d-flex d-inline-flex"><h4><%=user.fName%> <%=user.lName%></h4></span>
+                <span class="d-flex d-inline-flex profile-head-text"><%=user.fName%> <%=user.lName%></span>
             </div>
             <% if (currentUser){ %>
                 <div><a href="/user/<%=currentUser._id%>/edit" class="btn btn-sm btn-primary">Update Profile</a></div>
