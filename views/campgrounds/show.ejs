@@ -16,7 +16,7 @@
 					<span class="card-head-text"><a href=""><%=campground.name%></a></span>
 					<div class="float-right"><h6>$<%=campground.price%>/night</h6></div>
 					<div>
-						<span class="time">Submitted by : <%=campground.author.name%></span><span class="time"> - <%=moment(campground.dateAdded).fromNow()%></span>
+						<span class="time">Submitted by : <a href="/user/<%=campground.author.id%>"><%=campground.author.name%></a></span><span class="time"> - <%=moment(campground.dateAdded).fromNow()%></span>
 					</div>
 					<div>
 						<form method="POST">

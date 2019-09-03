@@ -6,15 +6,13 @@
     </div>
 <%} else{ %>
     <div class="container">
-        <div class="profile-head">
+        <div class="profile-head shadow-sm">
+            <%if (!user.profilePicUrl){ %>
+                <%user.profilePicUrl = "https://cdn2.iconfinder.com/data/icons/ui-1/60/05-512.png"%>
+            <%}%>
             <div>
-                <%if (!user.profilePicUrl){ %>
-                    <%user.profilePicUrl = "https://cdn2.iconfinder.com/data/icons/ui-1/60/05-512.png"%>
-                <%}%>
                 <img class="rounded-circle profile-image img-thumbnail" src="<%=user.profilePicUrl %>" alt="image.png">
-            </div>
-            <div>
-                    <%=user.fName%> <%=user.lName%>
+                <span class="d-flex d-inline-flex"><h4><%=user.fName%> <%=user.lName%></h4></span>
             </div>
             <% if (currentUser){ %>
                 <div><a href="/user/<%=currentUser._id%>/edit" class="btn btn-sm btn-primary">Update Profile</a></div>
@@ -22,29 +20,49 @@
         </div>
     <div class="row">
         <div class="col-3">
-            <div>
-                <span><h5>About Me</h5></span>
-                <p><%=user.about.substring(0, 250) %></p> <!--remove substring function. about field will have a max of 250 chars-->
+            <div class="card mt-2 shadow-sm">
+                <div class="card-body">
+                    <div>
+                        <span><h5>About Me</h5></span>
+                        <p><%=user.about %></p> <!--remove substring function. about field will have a max of 250 chars-->
+                    </div>
+                    <hr>
+                    <div>
+                        <div>Joined: <%=moment(user.created).format("MMM YYYY")%></div>
+                        <div>Posts: <%=user.posts.length %></div>
+                        <div>Reviews: <%=user.reviews.length %></div>
+                        <div>From: <%=user.country %></div>
+                    </div>
+                    <hr>
+                    <div>
+                        <span><h5>My Interests</h5></span>
+                        <p>
+                            <%=user.interests %>
+                        </p>
+                    </div>
+                </div>
             </div>
-            <hr>
-            <div>
-                <span><h5>Bio</h5></span>
-                <div>Joined Date: <%=moment(user.created).format("MMM YYYY")%></div>
-                <div>Posts: <%=user.posts.length %></div>
-                <div>Reviews: <%=user.reviews.length %></div>
-                <div>From: <%=user.country %></div>
-            </div>
-            <hr>
-            <div>
-                <span><h5>My Interests</h5></span>
-                <p>
-                    <%=user.interests %>
-                </p>
-            </div>
-            
         </div>
         <div class="col-6">
-            <div><a href="/campgrounds"><-Back</a></div>
+            <% if (user.posts.length === 0){ %>
+                <span>User has not submitted any campgrounds yet</span>
+            <% } else { %>
+                <% posts.forEach(function(post){ %>
+                    <% if (post.author.id == user.id) { %>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card rounded-0 mt-2 mb-2 shadow-sm">
+                                        <div class="card-header bg-white">
+                                            <h5 class="card-title"><a href="/campgrounds/<%=post._id%>"><%=post.name%></a></h5>
+                                            <span><%=moment(post.dateAdded).format("MMM YYYY")%></span>
+                                        </div>
+                                    <img class="card-img-top rounded-0" src="<%=post.image%>" alt="post.png">
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                <% }) %>
+            <% } %>
         </div>
     </div>
 </div>
