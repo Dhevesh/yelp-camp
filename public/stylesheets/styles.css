@@ -139,6 +139,10 @@ button:focus{
     font-size: 8rem;
 }
 
+.user-icon{
+    font-size: 8rem;
+}
+
 /* External ICON class updates */
 .fa-user-plus{
     padding-top: 10px;

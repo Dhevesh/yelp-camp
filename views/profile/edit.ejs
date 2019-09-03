@@ -1,37 +1,49 @@
 <% include ../partials/header%>
-<div class="form-narrow">
-    <span><h1>Update your profile details</h1></span>
-    <form action="/user/<%=user.userId.id%>/edit?_method=PUT" method="POST" class="form">
+
+<div class="form-wide form-wide-long form-align">
+    <div class="form-title">
+        <span><h1>Update your profile details</h1></span>
+    </div>
+    <form action="/user/<%=user._id%>/edit?_method=PUT" method="POST" class="form">
         <div class="form-group">
-            <input class="form-control" type="text" name="profile[fName]" value="<%=user.fName%>">
+            <input class="form-control" type="text" name="profile[fName]" value="<%=user.fName%>" placeholder="first name">
         </div>
         <div class="form-group">
-            <input class="form-control" type="text" name="profile[lName]" value="<%=user.lName%>">
+            <input class="form-control" type="text" name="profile[lName]" value="<%=user.lName%>" placeholder="last name">
         </div>
         <div class="form-group">
             <input class="form-control" type="date" name="profile[dateOfBirth]">
         </div>
-        <div class="form-group">
-            <input class="form-control" type="text" name="profile[gender]" value="<%=user.gender%>">
+        <div class="input-group">
+            <% var maleCheck, femaleCheck; if (currentUser.gender == "male") {maleCheck = "checked";} else if (currentUser.gender == "female") {femaleCheck = "checked";} else {maleCheck = ""; femaleCheck = "";} %>
+            <div class="form-group px-1">
+                <input class="" type="radio" name="profile[gender]" value="male" <%=maleCheck%>>
+                <span>Male</span>
+            </div>
+            <div class="form-group px-1">
+                <input class="" type="radio" name="profile[gender]" value="female" <%=femaleCheck%>>
+                <span>Female</span>
+            </div>
         </div>
         <div class="form-group">
-            <input class="form-control" type="text" name=profile[profilePicUrl] value="<%=user.profilePicUrl%>">
+            <input class="form-control" type="text" name="profile[profilePicUrl]" value="<%=user.profilePicUrl%>" placeholder="profile picture">
         </div>        
         <div class="form-group">
-            <input class="form-control" type="text" name=profile[about]  value="<%=user.about%>">
+            <input class="form-control" type="text" name="profile[about]"  value="<%=user.about%>" placeholder="about">
         </div>
         <div class="form-group">
-            <input class="form-control" type="text" name=profile[phone]  value="<%=user.phone%>">
+            <input class="form-control" type="text" name="profile[phone]"  value="<%=user.phone%>" placeholder="phone number">
         </div>
         <div class="form-group">
-            <input class="form-control" type="text" name=profile[country] value="<%=user.country%>">
+            <input class="form-control" type="text" name="profile[country]" value="<%=user.country%>" placeholder="country">
         </div>
         <div class="form-group">
-            <input class="form-control" type="text" name=profile[interests]  value="<%=user.interests%>">
+            <input class="form-control" type="text" name="profile[interests]"  value="<%=user.interests%>" placeholder="interests">
         </div>
         <div class="form-group">
-            <button class="btn btn-primary">Update Profile</button>
+            <button class="btn btn-block btn-success">Update Profile</button>
         </div>
+        <div><a href="/user/<%=user._id%>">Go Back</a></div>
         
     </form>
 </div>
