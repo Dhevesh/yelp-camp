@@ -1,11 +1,11 @@
 const express = require("express");
-const router = express();
+const router = express.Router();
 
 const user = require("../models/users")
 const userProfile = require("../models/user-profile");
 const isAuthUser = require("../controllers/user-auth");
 
-router.get("/:id", isAuthUser.isUserProfile, (req, res)=>{
+router.get("/:id", (req, res)=>{
     user.findById(req.params.id, (err, foundUser)=>{
         if (!err){
             res.render("profile/show", {user: foundUser});
