@@ -13,7 +13,7 @@
 			<div class="card">
 				<img class="card-img-top" src="<%=campground.image%>">
 				<div class="card-header">
-					<span class="card-head-text"><a href=""><%=campground.name%></a></span>
+					<span class="card-head-text"><%=campground.name%></span>
 					<div class="float-right"><h6>$<%=campground.price%>/night</h6></div>
 					<div>
 						<span class="time">Submitted by : <a href="/user/<%=campground.author.id%>"><%=campground.author.name%></a></span><span class="time"> - <%=moment(campground.dateAdded).fromNow()%></span>
@@ -61,6 +61,10 @@
 								</div>
 									<%for (i = 0; i < author.length; i ++){ %>
 										<%if (author[i].id == comment.author.id){ %>
+											<% var isAdmin; if (author[i].role == "admin") { isAdmin = "badge-success"} else { isAdmin = "badge-secondary"} %>
+											<div class="badge badge-pill <%=isAdmin%> pb-1 mb-1">
+												<%=author[i].role%>
+											</div>
 											<div>
 												<% if (author[i].profilePicUrl){ %>
 													<img class="user-pic" src="<%=author[i].profilePicUrl%>" alt="user.png">
