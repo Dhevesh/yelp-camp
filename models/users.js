@@ -10,6 +10,7 @@ const userSchema = new Schema({
     created: { type : Date, default : Date.now },
     fName: String,
     lName: String,
+    alias: String,
     dateOfBirth: Date,
     gender: String,
     profilePicUrl: String,
