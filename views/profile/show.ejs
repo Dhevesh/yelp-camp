@@ -6,7 +6,7 @@
     </div>
 <%} else{ %>
     <div class="container">
-        <div class="profile-head shadow-sm">
+        <div class="profile-head shadow-sm" style="background-image: url(<%=user.coverImageUrl%>)">
             <%if (!user.profilePicUrl){ %>
                 <% if (user.gender == "male") { user.profilePicUrl = "https://res.cloudinary.com/dheveshp/image/upload/v1567593144/default-avatar-male_tqvfck.png"} else { %>
                     <%user.profilePicUrl = "https://res.cloudinary.com/dheveshp/image/upload/v1567593144/default-avatar-female_ebku4e.png"%>
@@ -20,12 +20,12 @@
         <div class="profile-footer shadow-sm">
                 <% if (currentUser) { %>
                     <% if (currentUser.id == user.id || currentUser.role == "admin") { %>
-                    <a class="btn btn-sm btn-primary mt-2 mr-2" href="/user/<%=currentUser._id%>/edit">Update Profile</a>
+                    <a class="btn btn-sm btn-success mt-2 mr-2" href="/user/<%=currentUser._id%>/edit">Update Profile</a>
                     <% } %>
                 <% } %>
             </div>
     <div class="row">
-        <div class="col-3">
+        <div class="col-4">
             <div class="card mt-2 shadow-sm">
                 <div class="card-body">
                     <div>
@@ -53,7 +53,9 @@
         </div>
         <div class="col-6">
             <% if (user.posts.length === 0){ %>
-                <span>User has not submitted any campgrounds yet</span>
+                <div class="mt-2">
+                    <span>User has not submitted any campgrounds yet.</span>
+                </div>
             <% } else { %>
                 <% posts.forEach(function(post){ %>
                     <% if (post.author.id == user.id) { %>

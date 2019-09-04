@@ -13,6 +13,7 @@ const userSchema = new Schema({
     dateOfBirth: Date,
     gender: String,
     profilePicUrl: String,
+    coverImageUrl: String,
     about: String,
     phone: String,
     country: String,

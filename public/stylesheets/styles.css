@@ -141,7 +141,9 @@ button:focus{
 .profile-head{
     height: 220px;
     max-height: 100%;
-    background-color: rgba(0, 200, 100, 0.75);
+    background-color: rgba(50, 180, 100, 0.9);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .profile-head-text{
