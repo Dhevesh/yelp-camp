@@ -13,7 +13,13 @@
 			<div class="card">
 				<img class="card-img-top" src="<%=campground.image%>">
 				<div class="card-header">
-					<span class="card-head-text"><%=campground.name%></span>
+					<span class="card-head-text pr-2"><%=campground.name%></span>
+					<% if(currentUser && campground.author.id.equals(currentUser._id) || currentUser && currentUser.userRole == "admin"){ %>
+						<a href="/campgrounds/<%=campground._id%>/edit"><span><i class="far fa-edit"></i></span></a>
+						<form class="delete-form" action="/campgrounds/<%=campground._id%>/delete?_method=DELETE" method="POST">
+							<button><span><i class="far fa-trash-alt"></i></span></button>
+						</form>
+					<% } %>
 					<div class="float-right"><h6>$<%=campground.price%>/night</h6></div>
 					<div>
 						<span class="time">Submitted by : <a href="/user/<%=campground.author.id%>"><%=campground.author.name%></a></span><span class="time"> - <%=moment(campground.dateAdded).fromNow()%></span>
@@ -31,13 +37,6 @@
 						
 				</div>
 				<div class="card-body">
-					<% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
-						<a href="/campgrounds/<%=campground._id%>/edit"><span><i class="far fa-edit"></i></span></a>
-						<form class="delete-form" action="/campgrounds/<%=campground._id%>/delete?_method=DELETE" method="POST">
-							<button><span><i class="far fa-trash-alt"></i></span></button>
-						</form>
-					<% } %>
-					
 					<p class="card-text"><%=campground.description%></p>
 				</div>
 			</div>
@@ -86,7 +85,7 @@
 										<%} %>
 									<%} %>
 								<div>
-								<% if (currentUser && comment.author.id.equals(currentUser._id)){ %>
+								<% if (currentUser && comment.author.id.equals(currentUser._id) || currentUser && currentUser.role == "admin"){ %>
 									<a href="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>/edit"><span><i class="far fa-edit"></i></span></a>
 									<form class="delete-form" action="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
 										<button><span><i class="far fa-trash-alt"></i></span></button>
