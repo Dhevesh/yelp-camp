@@ -5,39 +5,74 @@
         <button>Create Profile</button>
     </div>
 <%} else{ %>
-
-<div class="container">
+    <div class="container">
+        <div class="profile-head shadow-sm" style="background-image: url(<%=user.coverImageUrl%>)">
+            <%if (!user.profilePicUrl){ %>
+                <% if (user.gender == "male") { user.profilePicUrl = "https://res.cloudinary.com/dheveshp/image/upload/v1567593144/default-avatar-male_tqvfck.png"; } else if (user.gender == "female") { %>
+                <% user.profilePicUrl = "https://res.cloudinary.com/dheveshp/image/upload/v1567593144/default-avatar-female_ebku4e.png"; } else { %>
+                <% user.profilePicUrl = "https://res.cloudinary.com/dheveshp/image/upload/v1567600443/default-profile-pic-png-9_rg9rkp.png"; } %>
+            <%}%>
+            <div class=profile-head-image>
+                <img class="profile-image img-thumbnail" src="<%=user.profilePicUrl %>" alt="image.png">
+                <span class="d-flex d-inline-flex profile-head-text"><%=user.fName%> <%=user.lName%></span>
+            </div>
+        </div>
+        <div class="profile-footer shadow-sm">
+                <% if (currentUser) { %>
+                    <% if (currentUser.id == user.id || currentUser.role == "admin") { %>
+                    <a class="btn btn-sm btn-success mt-2 mr-2" href="/user/<%=currentUser._id%>/edit">Update Profile</a>
+                    <% } %>
+                <% } %>
+            </div>
     <div class="row">
-        <div class="col-3">
-            <div>
-                <%if (!user.profilePicUrl){ %>
-                    <%user.profilePicUrl = "https://cdn2.iconfinder.com/data/icons/ui-1/60/05-512.png"%>
-                <%}%>
-                <img class="rounded-circle rounded-sm img-thumbnail" src="<%=user.profilePicUrl %>" alt="image.png">
+        <div class="col-4">
+            <div class="card mt-2 shadow-sm">
+                <div class="card-body">
+                    <div>
+                        <span><h5>About Me</h5></span>
+                        <p><%=user.about %></p> <!--remove substring function. about field will have a max of 250 chars-->
+                    </div>
+                    <hr>
+                    <div>
+                        <% var isAdmin; if (user.role == "admin") { isAdmin = "badge-success" } else { isAdmin = "badge-secondary" } %>
+                        <div class="badge badge-pill pb-1 <%=isAdmin%>"><%=user.role%></div>
+                        <div>Joined: <%=moment(user.created).format("MMM YYYY")%></div>
+                        <div>Posts: <%=user.posts.length %></div>
+                        <div>Reviews: <%=user.reviews.length %></div>
+                        <div>From: <%=user.country %></div>
+                    </div>
+                    <hr>
+                    <div>
+                        <span><h5>My Interests</h5></span>
+                        <p>
+                            <%=user.interests %>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-6">
-            <div><%=user.fName%></div>
-            <div><%=user.lName%></div>
-            <div><%=user.dateOfBirth%></div>
-            <div><%=user.gender %></div>
-            <div><%=user.phone %></div>
-            <div><%=user.country %></div>
-            
-            <a href="/user/<%=currentUser._id%>/edit" class="btn btn-sm btn-primary">Update Profile</a>
-            <a href="/campgrounds"><-Back</a>
-        </div>
-        <div class="col-3">
-            <div>
-                <h5>About Me:</h5>
-                <p><%=user.about %></p>
-            </div>
-            <div>
-                What interests me?
-                <p>
-                    <%=user.interests %>
-                </p>
-            </div>
+            <% if (user.posts.length === 0){ %>
+                <div class="mt-2">
+                    <span>User has not submitted any campgrounds yet.</span>
+                </div>
+            <% } else { %>
+                <% posts.forEach(function(post){ %>
+                    <% if (post.author.id == user.id) { %>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card rounded-0 mt-2 mb-2 shadow-sm">
+                                        <div class="card-header bg-white">
+                                            <h5 class="card-title"><a href="/campgrounds/<%=post._id%>"><%=post.name%></a></h5>
+                                            <span><%=moment(post.dateAdded).format("MMM YYYY")%></span>
+                                        </div>
+                                    <img class="card-img-top rounded-0" src="<%=post.image%>" alt="post.png">
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                <% }) %>
+            <% } %>
         </div>
     </div>
 </div>

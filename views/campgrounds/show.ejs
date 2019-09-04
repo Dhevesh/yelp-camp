@@ -16,7 +16,7 @@
 					<span class="card-head-text"><a href=""><%=campground.name%></a></span>
 					<div class="float-right"><h6>$<%=campground.price%>/night</h6></div>
 					<div>
-						<span class="time">Submitted by : <%=campground.author.name%></span><span class="time"> - <%=moment(campground.dateAdded).fromNow()%></span>
+						<span class="time">Submitted by : <a href="/user/<%=campground.author.id%>"><%=campground.author.name%></a></span><span class="time"> - <%=moment(campground.dateAdded).fromNow()%></span>
 					</div>
 					<div>
 						<form method="POST">
@@ -52,13 +52,16 @@
 				<% } else { %>
 					<%campground.comments.forEach((comment)=>{%>
 						<div class="row">
-							<div class="col-4 pb-2"> <!--review author-->
-								<strong><%=comment.author.name%></strong>
-								<span class="pull-right time">
-									<%=moment(comment.dateAdded).fromNow()%>
-								</span>
+							<div class="col-5 pb-2"> <!--review author-->
+								<div>
+									<strong><a href="/user/<%=comment.author.id%>"><%=comment.author.name%></a></strong>
+									<span class="pull-right time">
+										<%=moment(comment.dateAdded).fromNow()%>
+									</span>
+								</div>
 									<%for (i = 0; i < author.length; i ++){ %>
 										<%if (author[i].id == comment.author.id){ %>
+											<div class="user-pic"><img src="" alt="user.png"></div>
 											<div>
 												User since: <%=moment(author[i].created).format("MMM YYYY")%>
 											</div>
@@ -67,6 +70,9 @@
 											</div>
 											<div>
 												Reviews: <%=author[i].reviews.length%>
+											</div>
+											<div>
+
 											</div>
 											
 										<%} %>
@@ -79,15 +85,11 @@
 									</form>
 								<% }; %>
 								</div>
-								
 							</div>
-							<div class="col-4 pb-2"> <!--review body-->
+							<div class="col-7 pb-2"> <!--review body-->
 								<p>
 									<%=comment.text%>
 								</p>
-							</div>
-							<div class="col-4 text-right pb-2"> <!--camp rating-->
-								Rating: 5 Stars
 							</div>
 						</div>
 					<%})%>

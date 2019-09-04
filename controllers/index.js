@@ -21,7 +21,7 @@ router.post("/register",(req,res)=>{
 		if (!err) {
 			passport.authenticate("local")(req, res, ()=>{
 				req.flash("success", "Welcome to Yelp Camp! " + user.username);
-				res.redirect("/user/"+user._id+"/new");
+				res.redirect("/user/"+user._id+"/edit");
 			});
 		} else {
 			req.flash("error", err.message);
