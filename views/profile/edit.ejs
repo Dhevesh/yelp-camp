@@ -1,21 +1,27 @@
 <% include ../partials/header%>
 
 <div class="form-wide form-wide-long form-align">
-    <div class="form-title">
-        <span><h1>Update your profile details</h1></span>
+    <div class="form-title form-title-text">
+        <span>Update your profile details</span>
     </div>
     <form action="/user/<%=user._id%>/edit?_method=PUT" method="POST" class="form">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text">First Name</span>
             </div>
-            <input class="form-control" type="text" name="profile[fName]" value="<%=user.fName%>" placeholder="first name">
+            <input class="form-control" type="text" name="profile[fName]" value="<%=user.fName%>" placeholder="first name" required>
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text">Last Name</span>
             </div>
-            <input class="form-control" type="text" name="profile[lName]" value="<%=user.lName%>" placeholder="last name">
+            <input class="form-control" type="text" name="profile[lName]" value="<%=user.lName%>" placeholder="last name" required>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Alias</span>
+            </div>
+            <input class="form-control" type="text" name="profile[alias]" value="<%=user.alias%>" placeholder="will be shown as your user tag" required>
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -48,7 +54,7 @@
         </div>        
         <div class="form-group mb-3">
             <label for="profile[about]">About Me (Max 250 chars)</label>
-            <textarea class="form-control" name="profile[about]" id="about" cols="30" rows="3" maxlength="250" placeholder="Max 250 chars"><%=user.about%></textarea>
+            <textarea class="form-control" name="profile[about]" id="about" cols="30" rows="2" maxlength="250" placeholder="Max 250 chars"><%=user.about%></textarea>
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
