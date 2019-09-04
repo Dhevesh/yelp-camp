@@ -18,22 +18,6 @@ router.get("/:id", (req, res)=>{
     });
 });
 
-// NEW PROFILE ROUTES
-router.get("/:id/new", isAuthUser.isLoggedIn, (req, res)=>{
-    res.render("profile/new");
-});
-
-router.post("/:id/new", isAuthUser.isLoggedIn, (req, res)=>{
-    user.findByIdAndUpdate(req.params.id, req.body.profile, (err, newUserProfile)=>{
-        if (!err){
-            res.redirect("/campgrounds");
-        } else{
-            console.log(err);
-        }
-    });
-    
-});
-
 // UPDATE USER ROUTES
 
 router.get("/:id/edit", isAuthUser.isUserProfile, (req, res)=>{

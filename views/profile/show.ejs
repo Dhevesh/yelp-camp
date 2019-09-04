@@ -8,9 +8,9 @@
     <div class="container">
         <div class="profile-head shadow-sm" style="background-image: url(<%=user.coverImageUrl%>)">
             <%if (!user.profilePicUrl){ %>
-                <% if (user.gender == "male") { user.profilePicUrl = "https://res.cloudinary.com/dheveshp/image/upload/v1567593144/default-avatar-male_tqvfck.png"} else { %>
-                    <%user.profilePicUrl = "https://res.cloudinary.com/dheveshp/image/upload/v1567593144/default-avatar-female_ebku4e.png"%>
-                <% } %>
+                <% if (user.gender == "male") { user.profilePicUrl = "https://res.cloudinary.com/dheveshp/image/upload/v1567593144/default-avatar-male_tqvfck.png"; } else if (user.gender == "female") { %>
+                <% user.profilePicUrl = "https://res.cloudinary.com/dheveshp/image/upload/v1567593144/default-avatar-female_ebku4e.png"; } else { %>
+                <% user.profilePicUrl = "https://res.cloudinary.com/dheveshp/image/upload/v1567600443/default-profile-pic-png-9_rg9rkp.png"; } %>
             <%}%>
             <div class=profile-head-image>
                 <img class="profile-image img-thumbnail" src="<%=user.profilePicUrl %>" alt="image.png">
