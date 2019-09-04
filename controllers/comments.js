@@ -25,7 +25,7 @@ router.post("/",isAuthUser.isLoggedIn,(req,res)=>{
 			Comment.create(req.body.comment, (err, newComment)=>{
 				if (!err){
                     newComment.author.id = req.user._id;
-                    newComment.author.name = req.user.username;
+                    newComment.author.name = req.user.alias;
                     newComment.save();
 					console.log(newComment);
 					foundCampground.comments.push(newComment);

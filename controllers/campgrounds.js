@@ -27,7 +27,7 @@ router.post("/",isAuthUser.isLoggedIn,(req,res)=>{
 	Campground.create(req.body.campground, (err,newCampground)=>{
 		if (!err){
             newCampground.author.id = req.user._id;
-            newCampground.author.name = req.user.username;
+            newCampground.author.name = req.user.alias;
 			newCampground.save();
 			User.findById(req.user._id, (err, foundUser)=>{
 				if (!err){
