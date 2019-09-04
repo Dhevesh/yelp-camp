@@ -70,6 +70,10 @@
     z-index: 1;
 }
 
+.form-title-shadow-sm{
+    box-shadow: 0px -2px 20px -1px rgba(0,0,0,0.8);
+}
+
 .form-title-text{
     color: #fff;
     text-shadow: 0px 5px 5px rgba(0,0,0,0.8);

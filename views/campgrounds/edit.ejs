@@ -1,28 +1,35 @@
 <%include ../partials/header%>
-<div class="text-center">
-	<h1>Edit <%=campground.name%></h1>
-</div>
 
-<div class="form-narrow form-align">
+<div class="form-narrow form-narrow-long form-align">
+	<div class="form-title form-title-text">
+			<span class="form-title-text">Edit <%=campground.name%></span>
+	</div>
+	<div class="shadow-sm p-2 mt-2">
 	<form action="/campgrounds/<%=campground._id%>?_method=PUT" method="POST">
+		<label for="campgroundName">Campground Name</label>
 		<div class="form-group">
-			<input class="form-control" type="text" name="campground[name]" value="<%=campground.name%>">	
+			<input class="form-control" type="text" name="campground[name]" value="<%=campground.name%>" required>	
+		</div>
+		<label for="campgroundImageUrl">Image Url</label>
+		<div class="form-group">
+			<input class="form-control" type="text" name="campground[image]" value="<%=campground.image%>" required>	
+		</div>
+		<label for="campgroundPrice">Price</label>
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text">$/Night</span>
+			</div>
+			<input class="form-control" type="number" name="campground[price]" value="<%=campground.price%>" min="0" placeholder="0 if free" required>	
+		</div>
+		<label for="campgroundDescription">Describe the campground</label>
+		<div class="form-group">
+			<textarea class="form-control" name="campground[description]" cols="30" rows="3" maxlength="500" placeholder="max 500 chars"><%=campground.description%></textarea>
 		</div>
 		<div class="form-group">
-			<input class="form-control" type="text" name="campground[image]" value="<%=campground.image%>">	
+			<button class="btn btn-success btn-md">Update</button>
+			<span><a class="btn btn-secondary btn-md" href="/campgrounds">Cancel</a></span>	
 		</div>
-		<div class="form-group">
-				<input class="form-control" type="number" name="campground[price]" value="<%=campground.price%>" required>	
-		</div>
-		<div class="form-group">
-			<textarea class="form-control" name="campground[description]">
-				<%=campground.description%>
-			</textarea>
-		</div>
-		<div class="form-group">
-			<button class="btn btn-success btn-lg btn-block">Update</button>	
-		</div>
-		</form>
-	<a href="/campgrounds">Go Back</a>
+	</form>
+	</div>
 </div>
 <%include ../partials/footer%>
