@@ -27,7 +27,7 @@ router.post("/",isAuthUser.isLoggedIn,(req,res)=>{
                     newComment.author.id = req.user._id;
                     newComment.author.name = req.user.username;
                     newComment.save();
-
+					console.log(newComment);
 					foundCampground.comments.push(newComment);
 					foundCampground.save();
 					
@@ -65,10 +65,18 @@ router.put("/:comment_id", isAuthUser.isCommAuth, (req, res)=>{
 router.delete("/:comment_id", isAuthUser.isCommAuth, (req, res)=>{
 	Comment.findByIdAndDelete(req.params.comment_id, (err, deletedComment)=>{
 		if (!err){
+			Campground.findById(req.params.id, function(err, foundCampground){
+				if (!err){
+					foundCampground.comments.pull(deletedComment.id);
+					foundCampground.save();
+				} else {
+					console.log(err);
+					res.redirect("back");
+				}
+			});
 			req.flash("info", "Comment deleted!");
 			res.redirect("/campgrounds/" + req.params.id);
 		} else {
-			console.log(req.params.id);
 			res.redirect("back");
 		}
 	});

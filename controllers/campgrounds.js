@@ -50,7 +50,6 @@ router.post("/",isAuthUser.isLoggedIn,(req,res)=>{
 
 router.get("/:id",(req,res)=>{
 	User.find((err, foundUsers)=>{
-		console.log(foundUsers);
 		if (!err){
 			Campground.findById(req.params.id).populate("comments").exec((err,result)=>{
 				if (!err){
