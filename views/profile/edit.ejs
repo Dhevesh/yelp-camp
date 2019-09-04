@@ -1,17 +1,32 @@
 <% include ../partials/header%>
 
 <div class="form-wide form-wide-long form-align">
-    <div class="form-title">
-        <span><h1>Update your profile details</h1></span>
+    <div class="form-title form-title-text">
+        <span>Update your profile details</span>
     </div>
     <form action="/user/<%=user._id%>/edit?_method=PUT" method="POST" class="form">
-        <div class="form-group">
-            <input class="form-control" type="text" name="profile[fName]" value="<%=user.fName%>" placeholder="first name">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">First Name</span>
+            </div>
+            <input class="form-control" type="text" name="profile[fName]" value="<%=user.fName%>" placeholder="first name" required>
         </div>
-        <div class="form-group">
-            <input class="form-control" type="text" name="profile[lName]" value="<%=user.lName%>" placeholder="last name">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Last Name</span>
+            </div>
+            <input class="form-control" type="text" name="profile[lName]" value="<%=user.lName%>" placeholder="last name" required>
         </div>
-        <div class="form-group">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Alias</span>
+            </div>
+            <input class="form-control" type="text" name="profile[alias]" value="<%=user.alias%>" placeholder="will be shown as your user tag" required>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Date of Birth</span>
+            </div>
             <input class="form-control" type="date" name="profile[dateOfBirth]">
         </div>
         <div class="input-group">
@@ -25,22 +40,39 @@
                 <span>Female</span>
             </div>
         </div>
-        <div class="form-group">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Profile Picture</span>
+            </div>
             <input class="form-control" type="text" name="profile[profilePicUrl]" value="<%=user.profilePicUrl%>" placeholder="profile picture">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Cover Image</span>
+            </div>
+            <input class="form-control" type="text" name="profile[coverImageUrl]" value="<%=user.coverImageUrl%>" placeholder="cover image">
         </div>        
-        <div class="form-group">
-            <input class="form-control" type="text" name="profile[about]"  value="<%=user.about%>" placeholder="about">
+        <div class="form-group mb-3">
+            <label for="profile[about]">About Me (Max 250 chars)</label>
+            <textarea class="form-control" name="profile[about]" id="about" cols="30" rows="2" maxlength="250" placeholder="Max 250 chars"><%=user.about%></textarea>
         </div>
-        <div class="form-group">
-            <input class="form-control" type="text" name="profile[phone]"  value="<%=user.phone%>" placeholder="phone number">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Phone Number</span>
+            </div>
+            <input class="form-control" type="number" name="profile[phone]"  value="<%=user.phone%>" placeholder="phone number">
         </div>
-        <div class="form-group">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Country</span>
+            </div>
             <input class="form-control" type="text" name="profile[country]" value="<%=user.country%>" placeholder="country">
         </div>
-        <div class="form-group">
-            <input class="form-control" type="text" name="profile[interests]"  value="<%=user.interests%>" placeholder="interests">
+        <div class="form-group mb-3">
+            <label for="interests">My Interests (Max 250 chars)</label>
+            <textarea class="form-control" name="profile[interests]" id="interests" cols="30" rows="2" maxlength="250" placeholder="interest1, interest2..."><%=user.interests%></textarea>
         </div>
-        <div class="form-group">
+        <div class="input-group mb-3">
             <button class="btn btn-block btn-success">Update Profile</button>
         </div>
         <div><a href="/user/<%=user._id%>">Go Back</a></div>

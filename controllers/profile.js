@@ -1,32 +1,21 @@
 const express = require("express");
-const router = express();
+const router = express.Router();
 
 const user = require("../models/users")
-const userProfile = require("../models/user-profile");
+const campgrounds = require("../models/campgrounds");
 const isAuthUser = require("../controllers/user-auth");
 
-router.get("/:id", isAuthUser.isUserProfile, (req, res)=>{
+router.get("/:id", (req, res)=>{
     user.findById(req.params.id, (err, foundUser)=>{
         if (!err){
-            res.render("profile/show", {user: foundUser});
-        }
-    });
-});
-
-// NEW PROFILE ROUTES
-router.get("/:id/new", isAuthUser.isLoggedIn, (req, res)=>{
-    res.render("profile/new");
-});
-
-router.post("/:id/new", isAuthUser.isLoggedIn, (req, res)=>{
-    user.findByIdAndUpdate(req.params.id, req.body.profile, (err, newUserProfile)=>{
-        if (!err){
-            res.redirect("/campgrounds");
+            campgrounds.find((err, foundCampgrounds)=>{
+                res.render("profile/show", {user: foundUser, posts: foundCampgrounds});
+            });
         } else{
             console.log(err);
+            res.redirect("/campgrounds");
         }
     });
-    
 });
 
 // UPDATE USER ROUTES
