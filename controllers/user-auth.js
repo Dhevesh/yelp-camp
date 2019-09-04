@@ -18,7 +18,7 @@ middlewareObj.isLoggedIn = function(req, res, next){
 middlewareObj.isCampAuth = function(req, res, next){
     if (req.isAuthenticated()){
         Campground.findById(req.params.id, (err, foundCampground)=>{
-            if (foundCampground.author.id.equals(req.user._id)){
+            if (foundCampground.author.id.equals(req.user._id) || req.user.role =="admin"){
                 return next();
             } else {
 				req.flash("error", "You don't have permission to do that!");
@@ -32,7 +32,7 @@ middlewareObj.isCampAuth = function(req, res, next){
 middlewareObj.isCommAuth = function(req, res, next){
 	if (req.isAuthenticated()){
 		Comment.findById(req.params.comment_id, (err, foundComment)=>{
-			if (foundComment.author.id.equals(req.user._id)){
+			if (foundComment.author.id.equals(req.user._id) || req.user.role =="admin"){
 				return next();
 			} else {
 				req.flash("error", "You don't have permission to do that!");
@@ -46,7 +46,7 @@ middlewareObj.isCommAuth = function(req, res, next){
 
 middlewareObj.isUserProfile = function(req, res, next){
 	if (req.isAuthenticated()){
-		if (req.params.id == req.user._id){
+		if (req.params.id == req.user._id || req.user.role =="admin"){
 			return next();
 		} else {
 			res.redirect("/user/" + req.user._id);
