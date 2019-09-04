@@ -1,3 +1,22 @@
+.jumbotron{
+    /* background-image: url("https://images.unsplash.com/photo-1532309975451-db55af55d385?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80"); */
+    /* background-image: url("https://images.unsplash.com/photo-1503265192943-9d7eea6fc77a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80"); */
+    background-image: url("https://images.unsplash.com/photo-1535576434247-e0f50b766399?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.jumbotron-hr{
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 100, 0, 0), rgba(0, 200, 100, 0.75), rgba(0, 100, 0, 0));
+}
+
+.jumbotron-text{
+    color: #fff;
+    /* text-shadow: 0px 5px 5px green; */
+}
+
 .thumbnail img {
     width: 100%;
 }
@@ -43,20 +62,25 @@
     padding-top: 20px;
 }
 
-.fa-user-plus{
-    padding-top: 10px;
-    padding-left: 10px;
-    font-size: 2em;
-    
-}
-
 .card-head-text{
     font-size: 1.5rem;
 }
 
+.img-small{
+    height: 12rem;
+    width: 12rem;
+    max-height: 100%;
+    max-width: 100%;
+}
+
 .img-medium{
     height: 18rem;
+    max-height: 100%;
+    width: 18rem;
     max-width: 100%;
+}
+
+.img-large{
     max-height: 100%;
 }
 
@@ -71,4 +95,81 @@
     text-align: center;
     line-height: 0.7cm;
     padding-bottom: 5px;
+    opacity: 0;
+}
+
+.time{
+    font-size: 0.8rem;
+    font-style: italic;
+    padding-left: 2px;
+}
+
+button{
+    border: 0;
+    background: none;
+}
+
+button:focus{
+    outline: none;
+}
+
+/* External ICON class updates */
+.fa-user-plus{
+    padding-top: 10px;
+    padding-left: 10px;
+    font-size: 2em;
+}
+
+.fa-thumbs-down{
+    transform: scaleX(-1);
+}
+
+@media (min-width : 576px){
+    .card-scale{
+    width: 16rem;
+    max-width: 100%;
+    height: 24rem;
+    max-height: 100%;
+    }
+
+    .font-sm{
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 768px){
+    .card-scale{
+        width: 20rem;
+        max-width: 100%;
+        height: 26rem;
+        max-height: 100%;
+    }
+
+    .font-sm{
+        font-size: 1.2rem;
+    }
+}
+
+@media (min-width: 992px){
+    .card-scale{
+        width: 24rem;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .font-sm{
+        font-size: 1.1rem;
+    }
+}
+
+@media (min-width: 1200px){
+    .card-scale{
+        width: 30rem;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .font-sm{
+        font-size: 1.3;
+    }
 }

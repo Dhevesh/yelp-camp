@@ -6,8 +6,28 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     username: String,
     password: String,
-    role: { type : String, default : "user" },
-    created: { type : Date, default : Date.now }
+    created: { type : Date, default : Date.now },
+    fName: String,
+    lName: String,
+    alias: String,
+    dateOfBirth: Date,
+    gender: String,
+    profilePicUrl: String,
+    coverImageUrl: String,
+    about: String,
+    phone: String,
+    country: String,
+    interests: String,
+    posts: [{
+        id: { type : mongoose.Schema.Types.ObjectId, ref: "Campground" }
+    }],
+    reviews: [{
+        id: { type : mongoose.Schema.Types.ObjectId, ref: "Review" }
+    }],
+    comments: [{
+        id: { type : mongoose.Schema.Types.ObjectId, ref: "Comment" }
+    }]
+
 });
 
 userSchema.plugin(passportLocalMongoose);

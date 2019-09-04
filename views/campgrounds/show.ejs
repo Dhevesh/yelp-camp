@@ -14,10 +14,21 @@
 				<img class="card-img-top" src="<%=campground.image%>">
 				<div class="card-header">
 					<span class="card-head-text"><a href=""><%=campground.name%></a></span>
-					<div class="float-right"><h6><%=campground.price%>/night</h6></div>
+					<div class="float-right"><h6>$<%=campground.price%>/night</h6></div>
 					<div>
-						<span>Post by: <%=campground.author.name%></span><span class="time"> - <%=moment(campground.dateAdded).fromNow()%></span>
+						<span class="time">Submitted by : <%=campground.author.name%></span><span class="time"> - <%=moment(campground.dateAdded).fromNow()%></span>
 					</div>
+					<div>
+						<form method="POST">
+							<button id="likeButton" type="submit" formaction="/campgrounds/<%=campground._id%>/like">
+								<span id="likeSpan" class="badge badge-pill badge-secondary"><span class="px-2"><%=campground.likes.length%></span><i class="fas fa-thumbs-up p-1"></i></span>
+							</button>
+							<button id="dislikeButton" type="submit" formaction="/campgrounds/<%=campground._id%>/dislike">
+								<span id="dislikeSpan" class="badge badge-pill badge-secondary"><i class="fas fa-thumbs-down p-1"></i><span class="px-2"><%=campground.dislikes.length%></span></span>
+							</button>
+						</form>
+					</div>
+						
 				</div>
 				<div class="card-body">
 					<% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
@@ -41,11 +52,25 @@
 				<% } else { %>
 					<%campground.comments.forEach((comment)=>{%>
 						<div class="row">
-							<div class="col-12">
+							<div class="col-4 pb-2"> <!--review author-->
 								<strong><%=comment.author.name%></strong>
 								<span class="pull-right time">
 									<%=moment(comment.dateAdded).fromNow()%>
 								</span>
+									<%for (i = 0; i < author.length; i ++){ %>
+										<%if (author[i].id == comment.author.id){ %>
+											<div>
+												User since: <%=moment(author[i].created).format("MMM YYYY")%>
+											</div>
+											<div>
+												Posts: <%=author[i].posts.length%>
+											</div>
+											<div>
+												Reviews: <%=author[i].reviews.length%>
+											</div>
+											
+										<%} %>
+									<%} %>
 								<div>
 								<% if (currentUser && comment.author.id.equals(currentUser._id)){ %>
 									<a href="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>/edit"><span><i class="far fa-edit"></i></span></a>
@@ -54,14 +79,20 @@
 									</form>
 								<% }; %>
 								</div>
+								
+							</div>
+							<div class="col-4 pb-2"> <!--review body-->
 								<p>
 									<%=comment.text%>
 								</p>
 							</div>
+							<div class="col-4 text-right pb-2"> <!--camp rating-->
+								Rating: 5 Stars
+							</div>
 						</div>
 					<%})%>
 				<%} %>
-			</div>
+			</div> <!--comments div end-->
 		</div>
 	</div>
 </div>
