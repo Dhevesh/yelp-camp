@@ -6,7 +6,7 @@
     </div>
 <%} else{ %>
     <div class="container">
-        <div class="profile-head shadow-sm" style="background-image: url(<%=user.coverImageUrl%>)">
+        <div id="profile-head" class="profile-head shadow-sm" style="background-image: url(<%=user.coverImageUrl%>)">
             <%if (!user.profilePicUrl){ %>
                 <% if (user.gender == "male") { user.profilePicUrl = "https://res.cloudinary.com/dheveshp/image/upload/v1567593144/default-avatar-male_tqvfck.png"; } else if (user.gender == "female") { %>
                 <% user.profilePicUrl = "https://res.cloudinary.com/dheveshp/image/upload/v1567593144/default-avatar-female_ebku4e.png"; } else { %>
@@ -77,5 +77,17 @@
     </div>
 </div>
 <%} %>
+<script>
+    var m = "<%=user.coverImageUrl%>";
+    function toggleStyle(imageUrl){
+        if (imageUrl){
+            document.querySelector("#profile-head").style.background = "url("+imageUrl+")";
+        } else {
+            document.querySelector("#profile-head").style.background = "linear-gradient(to right, rgba(0, 150, 0, 0.8), rgba(0, 150, 0, 0.75), rgba(0, 150, 0, 0.8))";
+        }
+    }
 
+    toggleStyle(m);
+    
+</script>
 <%include ../partials/footer%>
