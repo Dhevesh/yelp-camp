@@ -1,3 +1,6 @@
+.checked{
+    color: orange;
+}
 .jumbotron{
     background-image: url("https://images.unsplash.com/photo-1535576434247-e0f50b766399?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80");
     background-repeat: no-repeat;

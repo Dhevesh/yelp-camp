@@ -6,7 +6,7 @@ const Review = require("../models/reviews");
 const isAuthUser = require("../controllers/user-auth");
 
 // REVIEW CREATE ROUTE
-router.get("/new",(req,res)=>{
+router.get("/new",isAuthUser.isLoggedIn, (req,res)=>{
 	Campground.findById(req.params.id,(err,foundCampground)=>{
 		if (!err){
 			res.render("reviews/new",{campground:foundCampground});
@@ -21,6 +21,7 @@ router.get("/new",(req,res)=>{
 router.post("/",isAuthUser.isLoggedIn,(req,res)=>{
 	Campground.findById(req.params.id,(err,foundCampground)=>{
 		if (!err){
+            console.log(req.body.review);
 			Review.create(req.body.review, (err, newReview)=>{
 				if (!err){
                     newReview.author.id = req.user._id;
@@ -33,7 +34,7 @@ router.post("/",isAuthUser.isLoggedIn,(req,res)=>{
 				} else{
 					console.log(err);
 				}
-			})
+			});
 			res.redirect("/campgrounds/"+foundCampground._id)
 		} else{
 			req.flash("error", "Unable to add review.");

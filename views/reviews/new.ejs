@@ -1,20 +1,26 @@
 <%include ../partials/header%>
-
-<div>
-    <span>Write a new review</span>
+<link rel="stylesheet" href="/stylesheets/rating.css">
+<div class="form-wide form-align">
+    <div class="form-title form-title-text">
+        <span>Write a new review</span>
+    </div>
+    <div class="shadow p-3 mt-2">
+        <form action="/campgrounds/<%=campground._id%>/reviews" method="POST">
+            <div class="stars">
+                <span class="star-rating star-5">
+                    <input class="star" type="radio" name="review[rating]" value="1"><i></i>
+                    <input class="star" type="radio" name="review[rating]" value="2"><i></i>
+                    <input class="star" type="radio" name="review[rating]" value="3"><i></i>
+                    <input class="star" type="radio" name="review[rating]" value="4"><i></i>
+                    <input class="star" type="radio" name="review[rating]" value="5"><i></i>
+                </span>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" name="review[text]" id="" cols="30" rows="10" placeholder="Do not post a review if you work for the listed campground."></textarea>
+            </div>
+            <button class="btn btn-lg btn-success">Submit Review</button>
+            <a class="btn btn-md btn-secondary" href="">Cancel</a>
+        </form>
+    </div>
 </div>
-
-<div>
-    <form action="">
-        <div>
-            Rating: 
-        </div>
-        <div class="form-group">
-            <textarea class="form-control" name="review[text]" id="" cols="30" rows="10" placeholder="Do not post a review if you work for the listed campground."></textarea>
-        </div>
-        <button class="btn btn-lg btn-success">Submit Review</button>
-        <a class="btn btn-md btn-secondary" href="">Cancel</a>
-    </form>
-</div>
-
 <%include ../partials/footer%>
