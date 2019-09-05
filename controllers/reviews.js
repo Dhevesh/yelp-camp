@@ -19,7 +19,7 @@ router.get("/new",isAuthUser.isLoggedIn, (req,res)=>{
 
 // REVIEW POST ROUTE
 router.post("/",isAuthUser.isLoggedIn,(req,res)=>{
-	Campground.findById(req.params.id,(err,foundCampground)=>{
+	Campground.findById(req.params.id).populate("reviews").exec(function (err,foundCampground){
 		if (!err){
             console.log(req.body.review);
 			Review.create(req.body.review, (err, newReview)=>{
@@ -27,15 +27,16 @@ router.post("/",isAuthUser.isLoggedIn,(req,res)=>{
                     newReview.author.id = req.user._id;
                     newReview.author.name = req.user.alias;
                     newReview.save();
-					console.log(newReview);
 					foundCampground.reviews.push(newReview);
+					foundCampground.rating = calculateAverage(foundCampground.reviews);
 					foundCampground.save();
-					
+
+					req.flash("Thank you for adding a review");
+					res.redirect("/campgrounds/"+foundCampground._id)
 				} else{
 					console.log(err);
 				}
 			});
-			res.redirect("/campgrounds/"+foundCampground._id)
 		} else{
 			req.flash("error", "Unable to add review.");
 			console.log(err);
@@ -54,7 +55,18 @@ router.get("/:review_id/edit", isAuthUser.isReviewAuth, (req, res)=>{
 router.put("/:review_id", isAuthUser.isReviewAuth, (req, res)=>{
 	Review.findByIdAndUpdate(req.params.review_id, req.body.review, (err, updatedReview)=>{
 		if (!err){
-			res.redirect("/campgrounds/" + req.params.id);
+			Campground.findById(req.params.id).populate("reviews").exec(function (err, foundCampground){
+				if (!err){
+					foundCampground.rating = calculateAverage(foundCampground.reviews);
+					foundCampground.save();
+					req.flash("success", "You updated your review.");
+					res.redirect("/campgrounds/" + req.params.id);
+
+				} else {
+					console.log(err);
+					return res.redirect("back");
+				}
+			});
 		} else {
 			res.redirect("back");
 		}
@@ -65,22 +77,35 @@ router.put("/:review_id", isAuthUser.isReviewAuth, (req, res)=>{
 router.delete("/:review_id", isAuthUser.isReviewAuth, (req, res)=>{
 	Review.findByIdAndDelete(req.params.review_id, (err, deletedReview)=>{
 		if (!err){
-			Campground.findById(req.params.id, function(err, foundCampground){
+			Campground.findById(req.params.id).populate("reviews").exec(function (err, foundCampground){
 				if (!err){
 					foundCampground.reviews.pull(deletedReview.id);
+					foundCampground.rating = calculateAverage(foundCampground.reviews);
 					foundCampground.save();
+
+					req.flash("info", "Review deleted!");
+					res.redirect("/campgrounds/" + req.params.id);
 				} else {
 					console.log(err);
 					res.redirect("back");
 				}
 			});
-			req.flash("info", "Review deleted!");
-			res.redirect("/campgrounds/" + req.params.id);
 		} else {
 			res.redirect("back");
 		}
 	});
 });
+
+function calculateAverage(reviews) {
+    if (reviews.length === 0) {
+        return 0;
+    }
+    var sum = 0;
+    reviews.forEach(function (element) {
+        sum += element.rating;
+    });
+    return sum / reviews.length;
+}
 
 
 module.exports = router;
