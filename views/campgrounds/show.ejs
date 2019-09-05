@@ -7,13 +7,15 @@
 				<li class="list-group-item"><span><i class="fas fa-map-marked-alt"></i></span></li>
 				<li class="list-group-item"><span><i class="fas fa-phone"></i></span></li>
 				<li class="list-group-item"><span><i class="far fa-clock"></i></span></li>
-				
+			</div>
+			<div>
+				<span class="time">Submitted by : <a href="/user/<%=campground.author.id%>"><%=campground.author.name%></a></span><span></span><span class="time"> - <%=moment(campground.dateAdded).fromNow()%></span>
 			</div>
 		</div>
 		<div class="col-6">
-			<div class="card">
+			<div class="card mb-4">
 				<img class="card-img-top" src="<%=campground.image%>">
-				<div class="card-header">
+				<div class="card-header bg-white">
 					<span class="card-head-text pr-2"><%=campground.name%></span>
 					<% if(currentUser && campground.author.id.equals(currentUser._id) || currentUser && currentUser.userRole == "admin"){ %>
 						<a href="/campgrounds/<%=campground._id%>/edit"><span><i class="far fa-edit"></i></span></a>
@@ -23,10 +25,19 @@
 					<% } %>
 					<div class="float-right"><h6>$<%=campground.price%>/night</h6></div>
 					<div>
-						<span class="time">Submitted by : <a href="/user/<%=campground.author.id%>"><%=campground.author.name%></a></span><span class="time"> - <%=moment(campground.dateAdded).fromNow()%></span>
+						<% if (campground.rating != 0) { %>
+							<% for (var i = 0; i < Math.round(campground.rating); i++){ %>
+								<span class="fas fa-star star-rating"></span>
+							<% } %>
+						<% } %>
 					</div>
+				</div>
+				<div class="card-body">
+					<p class="card-text"><%=campground.description%></p>
+				</div>
+				<div class="card-footer bg-white">
 					<div>
-						<form method="POST">
+						<form class="delete-form" method="POST">
 							<button id="likeButton" type="submit" formaction="/campgrounds/<%=campground._id%>/like">
 								<span id="likeSpan" class="badge badge-pill badge-secondary"><span class="px-2"><%=campground.likes.length%></span><i class="fas fa-thumbs-up p-1"></i></span>
 							</button>
@@ -34,18 +45,14 @@
 								<span id="dislikeSpan" class="badge badge-pill badge-secondary"><i class="fas fa-thumbs-down p-1"></i><span class="px-2"><%=campground.dislikes.length%></span></span>
 							</button>
 						</form>
+						<span class="float-right"><a class="btn btn-sm btn-success" href="/campgrounds/<%=campground._id%>/reviews/new">Write a Review</a></span>
 					</div>
-						
+					
 				</div>
-				<div class="card-body">
-					<p class="card-text"><%=campground.description%></p>
-				</div>
-			</div>
+			</div> <!--card end-->
 			
 			<div>
-				<div class="text-right">
-					<a class="btn btn-sm btn-success" href="/campgrounds/<%=campground._id%>/reviews/new">Write a Review</a>
-				</div>
+				
 				<hr>
 				<% if (!campground.reviews[0]){ %>
 					<div>Be the first to review this campsite!</div>
@@ -79,10 +86,6 @@
 											<div>
 												Reviews: <%=author[i].reviews.length%>
 											</div>
-											<div>
-
-											</div>
-											
 										<%} %>
 									<%} %>
 								<div>
@@ -97,7 +100,7 @@
 							<div class="col-7 pb-2"> <!--review body-->
 								<div class="stars">
 									<%for (var i=0; i < review.rating; i++){ %>
-										<span class="fas fa-star checked"></span>
+										<span class="fas fa-star star-rating"></span>
 									<% } %>
 								</div>
 								<p>
@@ -105,6 +108,7 @@
 								</p>
 							</div>
 						</div>
+						<hr>
 					<%})%>
 				<%} %>
 			</div> <!--reviews div end-->

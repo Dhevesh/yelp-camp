@@ -21,7 +21,6 @@ router.get("/new",isAuthUser.isLoggedIn, (req,res)=>{
 router.post("/",isAuthUser.isLoggedIn,(req,res)=>{
 	Campground.findById(req.params.id).populate("reviews").exec(function (err,foundCampground){
 		if (!err){
-            console.log(req.body.review);
 			Review.create(req.body.review, (err, newReview)=>{
 				if (!err){
                     newReview.author.id = req.user._id;
