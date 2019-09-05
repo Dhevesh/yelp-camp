@@ -21,15 +21,22 @@
 						<img class="card-img-top img-small" src="<%=campground.image%>" alt="image.png">
 						<div class="card-header">
 							<h5 class="card-head-text font-sm font-md"><%=campground.name%></h5>
+							<div>
+								<% if(campground.rating){ %>
+									<% for (var i = 0; i < campground.rating.length; i++){ %>
+										<span class="fas fa-star"></span>
+									<% } %>
+								<%} %>
+							</div>
 							<span class="badge badge-success"><%=campground.likes.length%></span>
 							<span class="badge badge-danger"><%=campground.dislikes.length%></span>
 							<span>
-								<%if (campground.comments.length === 0){ %>
+								<%if (campground.reviews.length === 0){ %>
 									No reviews yet
-								<%} else if (campground.comments.length === 1){ %>
+								<%} else if (campground.reviews.length === 1){ %>
 									1 review
 								<%} else{ %>
-									<%=campground.comments.length%> reviews
+									<%=campground.reviews.length%> reviews
 								<%} %>
 							</span>
 						</div>	

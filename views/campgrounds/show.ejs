@@ -95,6 +95,11 @@
 								</div>
 							</div>
 							<div class="col-7 pb-2"> <!--review body-->
+								<div class="stars">
+									<%for (var i=0; i < review.rating; i++){ %>
+										<span class="fas fa-star checked"></span>
+									<% } %>
+								</div>
 								<p>
 									<%=review.text%>
 								</p>
