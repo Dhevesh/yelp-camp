@@ -22,9 +22,9 @@
 						<div class="card-header">
 							<h5 class="card-head-text font-sm font-md"><%=campground.name%></h5>
 							<div>
-								<% if(campground.rating){ %>
-									<% for (var i = 0; i < campground.rating.length; i++){ %>
-										<span class="fas fa-star"></span>
+								<% if(campground.rating != 0){ %>
+									<% for (var i = 0; i < Math.round(campground.rating) ; i++){ %>
+										<span class="fas fa-star star-rating"></span>
 									<% } %>
 								<%} %>
 							</div>
@@ -40,7 +40,7 @@
 								<%} %>
 							</span>
 						</div>	
-						<div class="card-body">
+						<div class="card-body h-100">
 							<p class="card-text mb-0 pb-0"><%=campground.description.substring(0,100)%>...</p>
 							<a href="/campgrounds/<%=campground._id%>">continue reading</a>
 						</div>
