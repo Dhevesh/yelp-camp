@@ -9,6 +9,10 @@ const campgroundSchema = new mongoose.Schema({
 	description: String,
 	price: Number,
 	dateAdded: { type: Date, default : Date.now},
+	reviews: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Review"
+	}],
 	comments: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "Comment"

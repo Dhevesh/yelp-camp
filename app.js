@@ -13,6 +13,7 @@ const indexRoutes = require("./controllers/index");
 const campgroundRoutes = require("./controllers/campgrounds");
 const commentRoutes = require("./controllers/comments");
 const profileRoutes = require("./controllers/profile");
+const reviewRoutes = require("./controllers/reviews");
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:true}));
@@ -50,6 +51,7 @@ app.use((req,res,next)=>{
 app.use("/", indexRoutes);
 app.use("/user", profileRoutes);
 app.use("/campgrounds", campgroundRoutes);
+app.use("/campgrounds/:id/reviews", reviewRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
 
