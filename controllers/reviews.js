@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router({ mergeParams : true});
 
+const User = require("../models/users");
 const Campground = require("../models/campgrounds");
 const Review = require("../models/reviews");
 const isAuthUser = require("../controllers/user-auth");
@@ -29,9 +30,17 @@ router.post("/",isAuthUser.isLoggedIn,(req,res)=>{
 					foundCampground.reviews.push(newReview);
 					foundCampground.rating = calculateAverage(foundCampground.reviews);
 					foundCampground.save();
-
-					req.flash("Thank you for adding a review");
-					res.redirect("/campgrounds/"+foundCampground._id)
+					User.findById(req.user._id, (err, foundUser)=>{
+						if (!err){
+							foundUser.reviews.push(newReview._id);
+							foundUser.save();
+							req.flash("Thank you for adding a review");
+							res.redirect("/campgrounds/"+foundCampground._id);
+						} else {
+							return res.redirect("/campgrounds/" + req.params.id);
+						}
+					});
+					
 				} else{
 					console.log(err);
 				}
@@ -81,9 +90,17 @@ router.delete("/:review_id", isAuthUser.isReviewAuth, (req, res)=>{
 					foundCampground.reviews.pull(deletedReview.id);
 					foundCampground.rating = calculateAverage(foundCampground.reviews);
 					foundCampground.save();
+					User.findById(req.user._id, (err, foundUser)=>{
+						if (!err){
+							foundUser.reviews.pull(deletedReview.id);
+							foundUser.save();
 
-					req.flash("info", "Review deleted!");
-					res.redirect("/campgrounds/" + req.params.id);
+							req.flash("info", "Review deleted!");
+							res.redirect("/campgrounds/" + req.params.id);
+						}
+					});
+
+					
 				} else {
 					console.log(err);
 					res.redirect("back");
