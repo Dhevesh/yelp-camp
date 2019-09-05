@@ -1,6 +1,7 @@
 // all user authorisation middleware
 const Campground = require("../models/campgrounds");
 const Comment = require("../models/comments");
+const Review = require("../models/reviews");
 const UserProfile = require("../models/user-profile");
 var middlewareObj = {};
 
@@ -33,6 +34,22 @@ middlewareObj.isCommAuth = function(req, res, next){
 	if (req.isAuthenticated()){
 		Comment.findById(req.params.comment_id, (err, foundComment)=>{
 			if (foundComment.author.id.equals(req.user._id) || req.user.role =="admin"){
+				return next();
+			} else {
+				req.flash("error", "You don't have permission to do that!");
+			}
+		});
+	} else {
+		req.flash("error", "You need to login first!");
+		res.redirect("back");
+	}
+};
+
+//review author
+middlewareObj.isReviewAuth = function(req, res, next){
+	if (req.isAuthenticated()){
+		Review.findById(req.params.review_id, (err, foundReview)=>{
+			if (foundReview.author.id.equals(req.user._id) || req.user.role =="admin"){
 				return next();
 			} else {
 				req.flash("error", "You don't have permission to do that!");

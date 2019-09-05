@@ -45,13 +45,13 @@ router.post("/",isAuthUser.isLoggedIn,(req,res)=>{
 });
 
 // REVIEW EDIT ROUTE
-router.get("/:review_id/edit", isAuthUser.isCommAuth, (req, res)=>{
+router.get("/:review_id/edit", isAuthUser.isReviewAuth, (req, res)=>{
 	Review.findById(req.params.review_id, (err, foundReview)=>{
 		res.render("reviews/edit", { campground_id : req.params.id, review : foundReview });
 	});
 });
 
-router.put("/:review_id", isAuthUser.isCommAuth, (req, res)=>{
+router.put("/:review_id", isAuthUser.isReviewAuth, (req, res)=>{
 	Review.findByIdAndUpdate(req.params.review_id, req.body.review, (err, updatedReview)=>{
 		if (!err){
 			res.redirect("/campgrounds/" + req.params.id);
@@ -62,7 +62,7 @@ router.put("/:review_id", isAuthUser.isCommAuth, (req, res)=>{
 });
 
 // REVIEW DELETE ROUTE
-router.delete("/:review_id", isAuthUser.isCommAuth, (req, res)=>{
+router.delete("/:review_id", isAuthUser.isReviewAuth, (req, res)=>{
 	Review.findByIdAndDelete(req.params.review_id, (err, deletedReview)=>{
 		if (!err){
 			Campground.findById(req.params.id, function(err, foundCampground){
