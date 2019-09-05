@@ -91,8 +91,9 @@
 }
 
 .img-small{
+    object-fit: cover;
     height: 12rem;
-    width: 12rem;
+    /* width: 12rem; */
     max-height: 100%;
     max-width: 100%;
 }
