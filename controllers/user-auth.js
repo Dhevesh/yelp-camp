@@ -2,7 +2,6 @@
 const Campground = require("../models/campgrounds");
 const Comment = require("../models/comments");
 const Review = require("../models/reviews");
-const UserProfile = require("../models/user-profile");
 var middlewareObj = {};
 
 // user logged in
@@ -40,6 +39,7 @@ middlewareObj.isCommAuth = function(req, res, next){
 			}
 		});
 	} else {
+		req.session.redirectTo = req.originalUrl;
 		req.flash("error", "You need to login first!");
 		res.redirect("back");
 	}
@@ -56,10 +56,35 @@ middlewareObj.isReviewAuth = function(req, res, next){
 			}
 		});
 	} else {
+		req.session.redirectTo = req.originalUrl;
 		req.flash("error", "You need to login first!");
 		res.redirect("back");
 	}
 };
+
+middlewareObj.isUniqueReview = function(req, res, next){
+	if (req.isAuthenticated()){
+		Campground.findById(req.params.id).populate("reviews").exec((err, foundCampground)=>{
+			if (!err){
+				var isReviewed = foundCampground.reviews.some(function(review){
+					return review.author.id.equals(req.user._id);
+				});
+			} else {
+				console.log (err);
+			}
+			if (isReviewed){
+				req.flash("error", "You have already submitted a review for this post.");
+				res.redirect("/campgrounds/" + req.params.id);
+			} else{
+				return next();
+			}
+		});
+	} else {
+		req.session.redirectTo = req.originalUrl;
+		req.flash("error", "You need to login first!");
+		res.redirect("back");
+	}
+}
 
 middlewareObj.isUserProfile = function(req, res, next){
 	if (req.isAuthenticated()){
