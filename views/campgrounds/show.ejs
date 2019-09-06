@@ -18,8 +18,8 @@
 				<div class="card-header bg-white">
 					<span class="card-head-text pr-2"><%=campground.name%></span>
 					<% if(currentUser && campground.author.id.equals(currentUser._id) || currentUser && currentUser.userRole == "admin"){ %>
-						<a href="/campgrounds/<%=campground._id%>/edit"><span><i class="far fa-edit"></i></span></a>
-						<form class="delete-form" action="/campgrounds/<%=campground._id%>/delete?_method=DELETE" method="POST">
+						<a href="/campgrounds/<%=campground.slug%>/edit"><span><i class="far fa-edit"></i></span></a>
+						<form class="delete-form" action="/campgrounds/<%=campground.slug%>/delete?_method=DELETE" method="POST">
 							<button><span><i class="far fa-trash-alt"></i></span></button>
 						</form>
 					<% } %>
@@ -38,14 +38,14 @@
 				<div class="card-footer bg-white">
 					<div>
 						<form class="delete-form" method="POST">
-							<button id="likeButton" type="submit" formaction="/campgrounds/<%=campground._id%>/like">
+							<button id="likeButton" type="submit" formaction="/campgrounds/<%=campground.slug%>/like">
 								<span id="likeSpan" class="badge badge-pill badge-secondary"><span class="px-2"><%=campground.likes.length%></span><i class="fas fa-thumbs-up p-1"></i></span>
 							</button>
-							<button id="dislikeButton" type="submit" formaction="/campgrounds/<%=campground._id%>/dislike">
+							<button id="dislikeButton" type="submit" formaction="/campgrounds/<%=campground.slug%>/dislike">
 								<span id="dislikeSpan" class="badge badge-pill badge-secondary"><i class="fas fa-thumbs-down p-1"></i><span class="px-2"><%=campground.dislikes.length%></span></span>
 							</button>
 						</form>
-						<span class="float-right"><a class="btn btn-sm btn-success" href="/campgrounds/<%=campground._id%>/reviews/new">Write a Review</a></span>
+						<span class="float-right"><a class="btn btn-sm btn-success" href="/campgrounds/<%=campground.slug%>/reviews/new">Write a Review</a></span>
 					</div>
 					
 				</div>
@@ -90,8 +90,8 @@
 									<%} %>
 								<div>
 								<% if (currentUser && review.author.id.equals(currentUser._id) || currentUser && currentUser.role == "admin"){ %>
-									<a href="/campgrounds/<%=campground._id%>/reviews/<%=review._id%>/edit"><span><i class="far fa-edit"></i></span></a>
-									<form class="delete-form" action="/campgrounds/<%=campground._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
+									<a href="/campgrounds/<%=campground.slug%>/reviews/<%=review._id%>/edit"><span><i class="far fa-edit"></i></span></a>
+									<form class="delete-form" action="/campgrounds/<%=campground.slug%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
 										<button><span><i class="far fa-trash-alt"></i></span></button>
 									</form>
 								<% }; %>
@@ -115,10 +115,10 @@
 		</div>
 	</div>
 </div>
-
 <%include ../partials/footer%>
 <script>
 	document.addEventListener("DOMContentLoaded", function(){
+		if ("<%currentUser%>".length !== 0){
 		var likes = JSON.stringify("<%=campground.likes%>");
 		var uid = "<%=currentUser._id%>";
 		var likesArr = JSON.parse("[" + likes + "]");
@@ -131,10 +131,13 @@
 		var isDislikeFound = dislikesArr.some((id)=>{
 			return id == uid;
 		});
-		if (isLikeFound){
+		if (uid && isLikeFound){
 			$("#likeSpan").removeClass("badge-secondary").addClass("badge-success");
-		} else if (isDislikeFound){
+		} else if (uid && isDislikeFound){
 			$("#dislikeSpan").removeClass("badge-secondary").addClass("badge-danger");
+		}
+		} else {
+			console.log("reached else");
 		}
 	});	
 </script>

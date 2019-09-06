@@ -51,8 +51,8 @@ app.use((req,res,next)=>{
 app.use("/", indexRoutes);
 app.use("/user", profileRoutes);
 app.use("/campgrounds", campgroundRoutes);
-app.use("/campgrounds/:id/reviews", reviewRoutes);
-app.use("/campgrounds/:id/comments", commentRoutes);
+app.use("/campgrounds/:slug/reviews", reviewRoutes);
+app.use("/campgrounds/:slug/comments", commentRoutes);
 
 
 // all other routes

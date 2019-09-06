@@ -17,7 +17,7 @@ middlewareObj.isLoggedIn = function(req, res, next){
 // campground author
 middlewareObj.isCampAuth = function(req, res, next){
     if (req.isAuthenticated()){
-        Campground.findById(req.params.id, (err, foundCampground)=>{
+        Campground.findOne({slug: req.params.slug}, (err, foundCampground)=>{
             if (foundCampground.author.id.equals(req.user._id) || req.user.role =="admin"){
                 return next();
             } else {

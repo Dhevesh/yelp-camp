@@ -48,10 +48,10 @@ router.post("/",isAuthUser.isLoggedIn,(req,res)=>{
 
 // SHOW - shows more info about one campground
 
-router.get("/:id",(req,res)=>{
+router.get("/:slug",(req,res)=>{
 	User.find((err, foundUsers)=>{
 		if (!err){
-			Campground.findById(req.params.id).populate("reviews").exec((err,result)=>{
+			Campground.findOne({slug: req.params.slug}).populate("reviews").exec((err,result)=>{
 				if (!err){
 					res.render("campgrounds/show",{campground:result, author : foundUsers});		
 				}else{
@@ -69,8 +69,8 @@ router.get("/:id",(req,res)=>{
 });
 
 // EDIT ROUTE
-router.get("/:id/edit", isAuthUser.isCampAuth, (req,res)=>{
-	Campground.findById(req.params.id, (err, foundCampground)=>{
+router.get("/:slug/edit", isAuthUser.isCampAuth, (req,res)=>{
+	Campground.findOne({slug: req.params.slug}, (err, foundCampground)=>{
 		if ("err"){
 			res.render("campgrounds/edit", { campground : foundCampground });		
 		} else {
@@ -80,10 +80,10 @@ router.get("/:id/edit", isAuthUser.isCampAuth, (req,res)=>{
 });
 
 // UPDATE ROUTE
-router.put("/:id", isAuthUser.isCampAuth, (req,res)=>{
-	Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err, updatedCampground)=>{
+router.put("/:slug", isAuthUser.isCampAuth, (req,res)=>{
+	Campground.findOneAndUpdate({slug : req.params.slug}, req.body.campground, (err, updatedCampground)=>{
 		if (!err){
-			res.redirect("/campgrounds/" + req.params.id);
+			res.redirect("/campgrounds/" + req.params.slug);
 		} else{ 
 			console.log(err);
 			res.redirect("back");
@@ -92,13 +92,13 @@ router.put("/:id", isAuthUser.isCampAuth, (req,res)=>{
 });
 
 // DELETE ROUTE
-router.delete("/:id/delete", isAuthUser.isCampAuth, (req,res)=>{
-	Campground.findById(req.params.id, (err, campground)=>{
+router.delete("/:slug/delete", isAuthUser.isCampAuth, (req,res)=>{
+	Campground.findOne({slug : req.params.slug}, (err, campground)=>{
 		if (!err){
 			User.findById(req.user._id, (err, foundUser)=>{
 				if (!err){
 					var foundPost = foundUser.posts.some(function (postId) {
-						return postId.equals(campground._id);
+						return postId.equals(campground.slug);
 					});
 					if (foundPost){
 						foundUser.posts.pull(campground._id); //NEEDS TO BE REFACTORED TO ACCOUNT FOR ADMIN USER DELETING THE POST
