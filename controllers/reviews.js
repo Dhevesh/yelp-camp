@@ -7,7 +7,7 @@ const Review = require("../models/reviews");
 const isAuthUser = require("../controllers/user-auth");
 
 // REVIEW CREATE ROUTE
-router.get("/new",isAuthUser.isLoggedIn, (req,res)=>{
+router.get("/new",isAuthUser.isUniqueReview, (req,res)=>{
 	Campground.findById(req.params.id,(err,foundCampground)=>{
 		if (!err){
 			res.render("reviews/new",{campground:foundCampground});
@@ -19,7 +19,7 @@ router.get("/new",isAuthUser.isLoggedIn, (req,res)=>{
 });
 
 // REVIEW POST ROUTE
-router.post("/",isAuthUser.isLoggedIn,(req,res)=>{
+router.post("/",isAuthUser.isUniqueReview,(req,res)=>{
 	Campground.findById(req.params.id).populate("reviews").exec(function (err,foundCampground){
 		if (!err){
 			Review.create(req.body.review, (err, newReview)=>{
