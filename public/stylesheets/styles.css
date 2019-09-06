@@ -1,3 +1,7 @@
+.yelpcamp-font{
+    font-family: 'Rock Salt', cursive;
+}
+
 .jumbotron{
     background-image: url("https://images.unsplash.com/photo-1535576434247-e0f50b766399?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80");
     background-repeat: no-repeat;
@@ -15,8 +19,40 @@
     /* text-shadow: 0px 5px 5px green; */
 }
 
+.navbar-brand{
+    font-size: 1.5rem;
+}
+
+.navbar-toggler{
+    color: #fff !important;
+    opacity: 1;
+}
+
+.navbar-toggler-icon{
+    color: #fff !important;
+}
+.navbar-custom{
+    /* background-image: linear-gradient(to right, rgba(0, 100, 0, 0.5), rgba(0, 200, 0, 0.75), rgba(0, 100, 0, 0.5)); */
+    background-color: rgba(50, 200, 50, 0.9);
+    font-size: 1.2rem;
+}
+
+.navbar-custom a{
+    /* font-size: 1.2rem; */
+    color: #fff !important;
+    text-shadow: 0px 1px 2px rgba(0,0,0,0.8);
+}
+
+.navbar-custom-img{
+    width: 40px;
+    max-width: 100%;
+    height: 40px;
+    max-height: 100%;
+}
+
 .star-rating{
     color: rgba(0, 150, 50, 0.9);
+    
 }
 
 .thumbnail img {
@@ -95,7 +131,7 @@
 }
 
 .img-small{
-    object-fit: cover;
+    object-fit: fill;
     height: 12rem;
     /* width: 12rem; */
     max-height: 100%;
@@ -103,13 +139,15 @@
 }
 
 .img-medium{
+    object-fit: cover;
     height: 18rem;
     max-height: 100%;
-    width: 18rem;
+    /* width: 18rem; */
     max-width: 100%;
 }
 
 .img-large{
+    object-fit: fill;
     max-height: 100%;
 }
 
@@ -162,7 +200,7 @@ button:focus{
 .profile-head{
     height: 220px;
     max-height: 100%;
-    background-color: rgba(50, 180, 100, 0.9);
+    background-color: rgba(100, 100, 100, 0.9);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -196,12 +234,9 @@ button:focus{
 
 
 /* External ICON class updates */
-.fa-user-plus{
-    padding-top: 10px;
-    padding-left: 10px;
-    font-size: 2em;
+.fa-bars{
+    font-size: 1.5rem;
 }
-
 .fa-thumbs-down{
     transform: scaleX(-1);
 }

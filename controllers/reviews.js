@@ -94,12 +94,10 @@ router.delete("/:review_id", isAuthUser.isReviewAuth, (req, res)=>{
 						if (!err){
 							foundUser.reviews.pull(deletedReview.id);
 							foundUser.save();
-
 							req.flash("info", "Review deleted!");
 							res.redirect("/campgrounds/" + req.params.id);
 						}
 					});
-
 					
 				} else {
 					console.log(err);
