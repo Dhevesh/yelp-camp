@@ -116,28 +116,27 @@
 	</div>
 </div>
 <%include ../partials/footer%>
-<script>
-	document.addEventListener("DOMContentLoaded", function(){
-		if ("<%currentUser%>".length !== 0){
-		var likes = JSON.stringify("<%=campground.likes%>");
-		var uid = "<%=currentUser._id%>";
-		var likesArr = JSON.parse("[" + likes + "]");
-		var dislikes = JSON.stringify("<%=campground.dislikes%>");
-		var dislikesArr = JSON.parse("[" + dislikes + "]")
+<%if (currentUser){ %>
+	<script>
+		document.addEventListener("DOMContentLoaded", function(){
+			var likes = JSON.stringify("<%=campground.likes%>");
+			var uid = "<%=currentUser._id%>";
+			var likesArr = JSON.parse("[" + likes + "]");
+			var dislikes = JSON.stringify("<%=campground.dislikes%>");
+			var dislikesArr = JSON.parse("[" + dislikes + "]")
+	
+			var isLikeFound = likesArr.some((id)=>{
+				return id == uid;
+			});
+			var isDislikeFound = dislikesArr.some((id)=>{
+				return id == uid;
+			});
+			if (uid && isLikeFound){
+				$("#likeSpan").removeClass("badge-secondary").addClass("badge-success");
+			} else if (uid && isDislikeFound){
+				$("#dislikeSpan").removeClass("badge-secondary").addClass("badge-danger");
+			}
+		});	
+	</script>
+<% } %>
 
-		var isLikeFound = likesArr.some((id)=>{
-			return id == uid;
-		});
-		var isDislikeFound = dislikesArr.some((id)=>{
-			return id == uid;
-		});
-		if (uid && isLikeFound){
-			$("#likeSpan").removeClass("badge-secondary").addClass("badge-success");
-		} else if (uid && isDislikeFound){
-			$("#dislikeSpan").removeClass("badge-secondary").addClass("badge-danger");
-		}
-		} else {
-			console.log("reached else");
-		}
-	});	
-</script>
