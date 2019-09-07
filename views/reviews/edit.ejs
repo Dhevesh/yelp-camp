@@ -5,7 +5,7 @@
         <span>Edit review</span>
     </div>
     <div class="shadow p-3 mt-2">
-        <form action="/campgrounds/<%=campground_id%>/reviews/<%=review._id%>?_method=put" method="POST">
+        <form action="/campgrounds/<%=campground_slug%>/reviews/<%=review._id%>?_method=put" method="POST">
             <div class="stars">
                 <span class="star-rating star-5">
                     <input class="star" type="radio" name="review[rating]" value="1"><i></i>

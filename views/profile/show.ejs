@@ -54,7 +54,7 @@
         <div class="col-6">
             <% if (user.posts.length === 0){ %>
                 <div class="mt-2">
-                    <span>User has not submitted any campgrounds yet.</span>
+                    <span>User has no posts yet.</span>
                 </div>
             <% } else { %>
                 <% posts.forEach(function(post){ %>
@@ -63,7 +63,7 @@
                             <div class="col-12">
                                 <div class="card rounded-0 mt-2 mb-2 shadow-sm">
                                     <div class="card-header bg-white">
-                                        <h5 class="card-title"><a href="/campgrounds/<%=post._id%>"><%=post.name%></a></h5>
+                                        <h5 class="card-title"><a href="/campgrounds/<%=post.slug%>"><%=post.name%></a></h5>
                                         <span><%=moment(post.dateAdded).format("MMM YYYY")%></span>
                                     </div>
                                     <img class="card-img-top img-medium rounded-0" src="<%=post.image%>" alt="post.png">

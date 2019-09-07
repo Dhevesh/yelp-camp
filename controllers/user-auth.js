@@ -64,7 +64,7 @@ middlewareObj.isReviewAuth = function(req, res, next){
 
 middlewareObj.isUniqueReview = function(req, res, next){
 	if (req.isAuthenticated()){
-		Campground.findById(req.params.id).populate("reviews").exec((err, foundCampground)=>{
+		Campground.findOne({slug : req.params.slug}).populate("reviews").exec((err, foundCampground)=>{
 			if (!err){
 				var isReviewed = foundCampground.reviews.some(function(review){
 					return review.author.id.equals(req.user._id);
@@ -74,7 +74,7 @@ middlewareObj.isUniqueReview = function(req, res, next){
 			}
 			if (isReviewed){
 				req.flash("error", "You have already submitted a review for this post.");
-				res.redirect("/campgrounds/" + req.params.id);
+				res.redirect("/campgrounds/" + req.params.slug);
 			} else{
 				return next();
 			}
