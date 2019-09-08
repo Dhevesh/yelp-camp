@@ -22,11 +22,15 @@
 						<div class="card-header">
 							<h5 class="card-head-text font-sm font-md"><%=campground.name%></h5>
 							<div>
-								<% if(campground.rating != 0){ %>
-									<% for (var i = 0; i < Math.round(campground.rating) ; i++){ %>
-										<span class="fas fa-star star-rating"></span>
-									<% } %>
-								<%} %>
+								<% for (var i = 0; i < Math.floor(campground.rating) ; i++){ %>
+									<span class="fas fa-star star-rating"></span>
+								<% } %>
+								<% if (campground.rating%2 > 0 ) { %>
+									<span class="fas fa-star-half-alt star-rating"></span>
+								<% } %>
+								<% for (var i = (Math.round(campground.rating%2)); i < (5 - Math.floor(campground.rating)); i++){  %>
+									<span class="far fa-star"></span>	
+								<% } %>
 							</div>
 							<span class="badge badge-success"><%=campground.likes.length%></span>
 							<span class="badge badge-danger"><%=campground.dislikes.length%></span>
