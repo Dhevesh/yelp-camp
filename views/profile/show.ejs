@@ -69,8 +69,14 @@
                                     <img class="card-img-top img-medium rounded-0" src="<%=post.image%>" alt="post.png">
                                     <div class="card-footer bg-white">
                                         <div>
-                                            <%for (var i = 0; i < post.rating; i++) { %>
-                                                <span><i class="fas fa-star star-rating"></i></span>
+                                            <% for (var i = 0; i < Math.floor(post.rating) ; i++){ %>
+                                                <span class="fas fa-star star-rating"></span>
+                                            <% } %>
+                                            <% if (post.rating%2 > 0 ) { %>
+                                                <span class="fas fa-star-half-alt star-rating"></span>
+                                            <% } %>
+                                            <% for (var i = (Math.round(post.rating%2)); i < (5 - Math.floor(post.rating)); i++){  %>
+                                                <span class="far fa-star"></span>	
                                             <% } %>
                                         </div>                                        
                                         <span class="badge badge-primary pb-1">Reviews: <%=post.reviews.length%></span>

@@ -133,10 +133,10 @@
 	<script>
 		document.addEventListener("DOMContentLoaded", function(){
 			var likes = JSON.stringify("<%=campground.likes%>");
-			var uid = "<%=currentUser._id%>";
 			var likesArr = JSON.parse("[" + likes + "]");
 			var dislikes = JSON.stringify("<%=campground.dislikes%>");
 			var dislikesArr = JSON.parse("[" + dislikes + "]")
+			var uid = "<%=currentUser._id%>";
 	
 			var isLikeFound = likesArr.some((id)=>{
 				return id == uid;
