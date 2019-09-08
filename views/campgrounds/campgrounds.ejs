@@ -20,7 +20,7 @@
 					<div class="card card-scale">
 						<img class="card-img-top img-small" src="<%=campground.image%>" alt="image.png">
 						<div class="card-header">
-							<h5 class="card-head-text font-sm font-md"><%=campground.name%></h5>
+							<h5 class="card-head-text font-sm font-md"><a href="/campgrounds/<%=campground.slug%>"><%=campground.name%></a></h5>
 							<div>
 								<% for (var i = 0; i < Math.floor(campground.rating) ; i++){ %>
 									<span class="fas fa-star star-rating"></span>

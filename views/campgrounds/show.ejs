@@ -25,11 +25,20 @@
 					<% } %>
 					<div class="float-right"><h6>$<%=campground.price%>/night</h6></div>
 					<div>
-						<% if (campground.rating != 0) { %>
-							<% for (var i = 0; i < Math.round(campground.rating); i++){ %>
-								<span class="fas fa-star star-rating"></span>
-							<% } %>
+						<% for (var i = 0; i < Math.floor(campground.rating) ; i++){ %>
+							<span class="fas fa-star star-rating"></span>
 						<% } %>
+						<% if (campground.rating%2 > 0 ) { %>
+							<span class="fas fa-star-half-alt star-rating"></span>
+						<% } %>
+						<% for (var i = (Math.round(campground.rating%2)); i < (5 - Math.floor(campground.rating)); i++){  %>
+							<span class="far fa-star"></span>	
+						<% } %>
+						<span>
+							<%=campground.reviews.length%>
+							<%if (campground.reviews.length == 1){ %>review
+							<%} else {%> reviews <%}%>
+						</span>
 					</div>
 				</div>
 				<div class="card-body">
@@ -52,7 +61,6 @@
 			</div> <!--card end-->
 			
 			<div>
-				
 				<hr>
 				<% if (!campground.reviews[0]){ %>
 					<div>Be the first to review this campsite!</div>
@@ -99,8 +107,13 @@
 							</div>
 							<div class="col-7 pb-2"> <!--review body-->
 								<div class="stars">
-									<%for (var i=0; i < review.rating; i++){ %>
-										<span class="fas fa-star star-rating"></span>
+									<%for (var i=0; i < 5; i++){ %>
+										<% if (review.rating > i){ %>
+											<span class="fas fa-star star-rating"></span>
+										<% } else { %>
+											<span class="far fa-star"></span>
+										<% } %>
+										
 									<% } %>
 								</div>
 								<p>
