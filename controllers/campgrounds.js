@@ -122,11 +122,11 @@ router.delete("/:slug/delete", isAuthUser.isCampAuth, (req,res)=>{
 CURRENTLY YOU ARE REDIRECTED TO THE LOGIN PAGE ONCE YOU LOGIN YOU LIKE OR DISLIKE IS NOT COUNTED AND YOU HAVE TO
 PRESS THE BUTTON AGAIN */
 // LIKE ROUTE
-router.get("/:id/like", (req, res)=>{
-	res.redirect("/campgrounds/" + req.params.id);
+router.get("/:slug/like", (req, res)=>{
+	res.redirect("/campgrounds/" + req.params.slug);
 });
-router.post("/:id/like", isAuthUser.isLoggedIn, (req, res)=>{
-	Campground.findById(req.params.id, (err, foundCampground)=>{
+router.post("/:slug/like", isAuthUser.isLoggedIn, (req, res)=>{
+	Campground.findOne({slug : req.params.slug}, (err, foundCampground)=>{
 		if (!err){
 			var foundUserLike = foundCampground.likes.some(function (like){
 				return like.equals(req.user._id);
@@ -144,7 +144,7 @@ router.post("/:id/like", isAuthUser.isLoggedIn, (req, res)=>{
 			} 
 			foundCampground.save(function (err){
 				if (!err){
-					return res.redirect("/campgrounds/" + foundCampground._id);
+					return res.redirect("/campgrounds/" + foundCampground.slug);
 				} else{
 					console.log(err);
 					return res.redirect("/campgrounds");
@@ -158,11 +158,11 @@ router.post("/:id/like", isAuthUser.isLoggedIn, (req, res)=>{
 });
 
 // DISKLIKE ROUTE
-router.get("/:id/disklike", (req, res)=>{
-	res.redirect("/campgrounds" + req.params.id);
+router.get("/:slug/disklike", (req, res)=>{
+	res.redirect("/campgrounds" + req.params.slug);
 });
-router.post("/:id/dislike", isAuthUser.isLoggedIn, (req, res)=>{
-	Campground.findById(req.params.id, (err, foundCampground)=>{
+router.post("/:slug/dislike", isAuthUser.isLoggedIn, (req, res)=>{
+	Campground.findOne({slug : req.params.slug}, (err, foundCampground)=>{
 		if (!err){
 			var foundUserDislike = foundCampground.dislikes.some(function (like){
 				return like.equals(req.user._id);
@@ -180,7 +180,7 @@ router.post("/:id/dislike", isAuthUser.isLoggedIn, (req, res)=>{
 			}
 			foundCampground.save(function (err){
 				if (!err){
-					return res.redirect("/campgrounds/" + foundCampground._id);
+					return res.redirect("/campgrounds/" + foundCampground.slug);
 				} else{
 					console.log(err);
 					return res.redirect("/campgrounds");
