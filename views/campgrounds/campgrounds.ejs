@@ -14,39 +14,40 @@
 		</div>
 	</div>
 	<div class="container">
-		<div class="row">
-			<%campground.forEach((campground)=>{%>
-				<div class="col-12 col-sm-6 col-lg-3 pb-2">
-					<div class="card card-scale">
-						<img class="card-img-top img-small" src="<%=campground.image%>" alt="image.png">
-						<div class="card-header">
-							<h5 class="card-head-text font-sm font-md"><%=campground.name%></h5>
-							<div>
-								<% if(campground.rating != 0){ %>
-									<% for (var i = 0; i < Math.round(campground.rating) ; i++){ %>
-										<span class="fas fa-star star-rating"></span>
-									<% } %>
-								<%} %>
-							</div>
-							<span class="badge badge-success"><%=campground.likes.length%></span>
-							<span class="badge badge-danger"><%=campground.dislikes.length%></span>
-							<span>
-								<%if (campground.reviews.length === 0){ %>
-									No reviews yet
-								<%} else if (campground.reviews.length === 1){ %>
-									1 review
-								<%} else{ %>
-									<%=campground.reviews.length%> reviews
-								<%} %>
-							</span>
-						</div>	
-						<div class="card-body h-100">
-							<p class="card-text mb-0 pb-0"><%=campground.description.substring(0,100)%>...</p>
-							<a href="/campgrounds/<%=campground._id%>">continue reading</a>
-						</div>
+		<%campground.forEach((campground)=>{%>
+			<div class="row">
+				<div class="col-4 pb-2">
+					<a href="/campgrounds/<%=campground.slug%>"><img class="card-img-top img-small" src="<%=campground.image%>" alt="image.png"></a>
+				</div>
+				<div class="col-4 pb-2">
+					<div class="">
+						<h5 class="card-head-text font-sm font-md"><%=campground.name%></h5>	
 					</div>
-				</div>	
-			<%})%>
-		</div>
+					<p class="card-text mb-0 pb-0"><%=campground.description.substring(0,100)%>...</p>
+					<a href="/campgrounds/<%=campground._id%>">continue reading</a>
+				</div>
+				<div class="col-4 pb-2">
+					<div>
+						<% if(campground.rating != 0){ %>
+							<% for (var i = 0; i < Math.round(campground.rating) ; i++){ %>
+								<span class="fas fa-star star-rating"></span>
+							<% } %>
+						<%} %>
+					</div>
+					<span class="badge badge-success"><%=campground.likes.length%></span>
+					<span class="badge badge-danger"><%=campground.dislikes.length%></span>
+					<span>
+						<%if (campground.reviews.length === 0){ %>
+							No reviews yet
+						<%} else if (campground.reviews.length === 1){ %>
+							1 review
+						<%} else{ %>
+							<%=campground.reviews.length%> reviews
+						<%} %>
+					</span>
+				</div>
+			</div>
+			<hr>
+		<%})%>
 	</div>
 <%include ../partials/footer%>
