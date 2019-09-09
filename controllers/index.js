@@ -9,7 +9,11 @@ const Campground = require("../models/campgrounds");
 router.get("/",(req,res)=>{
 	Campground.find({}).sort({dateAdded : -1}).exec(function(err, foundCampgrounds){
 		if (!err){
-			res.render("index", {campgrounds : foundCampgrounds});
+			var images = [];
+			foundCampgrounds.forEach((campground)=>{
+				images.push(campground.image);
+			});
+			res.render("index", {campgrounds : foundCampgrounds, images : images});
 		}
 	});
 	

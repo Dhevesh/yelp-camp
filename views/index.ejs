@@ -23,15 +23,27 @@
 					</div>
 				</div>
 				<div class="carousel-inner">
-					<div class="carousel-item active" data-interval="5000">
-						<img class="d-block carousel-img" src="https://images.unsplash.com/photo-1464207687429-7505649dae38?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80"  alt="...">
-					</div>
-					<div class="carousel-item" data-interval="5000">
-						<img class="d-block carousel-img" src="https://images.unsplash.com/photo-1505735754789-3404132203ed?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"  alt="...">
-					</div>
-					<div class="carousel-item" data-interval="5000">
-						<img class="d-block carousel-img" src="https://images.unsplash.com/photo-1476041800959-2f6bb412c8ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"  alt="...">
-					</div>
+					<% if (images.length == 0){ %>
+						<div class="carousel-item active" data-interval="5000">
+							<img class="d-block carousel-img" src="https://images.unsplash.com/photo-1464207687429-7505649dae38?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80"  alt="...">
+						</div>
+						<div class="carousel-item" data-interval="5000">
+							<img class="d-block carousel-img" src="https://images.unsplash.com/photo-1505735754789-3404132203ed?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"  alt="...">
+						</div>
+						<div class="carousel-item" data-interval="5000">
+							<img class="d-block carousel-img" src="https://images.unsplash.com/photo-1476041800959-2f6bb412c8ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"  alt="...">
+						</div>
+					<% } else { %>
+						<div class="carousel-item active" data-interval="5000">
+							<img class="d-block carousel-img" src="<%=images[0]%>"  alt="campground.png">
+						</div>
+						<% images.slice(1,5).forEach((image)=>{ %>
+							<div class="carousel-item" data-interval="5000">
+								<img class="d-block carousel-img" src="<%=image%>"  alt="campground.png">
+							</div>
+						<% }); %>
+					<% } %>
+					
 				</div>
 				<a class="carousel-control-prev carousel-control-bg" href="#yelp-carousel" role="button" data-slide="prev">
 					<span aria-hidden="true"><i class="fa fa-chevron-left"></i></span>
