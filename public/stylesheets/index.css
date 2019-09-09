@@ -89,10 +89,17 @@ a:hover i.fa-tree{
     font-size: 1.8rem;
 }
 
-.footer-custom{
-    padding-top: 5px;
-    background-color: rgb(8, 168, 88);
-    color: rgb(228, 228, 228);
-    text-align: center;
-    line-height: 0.7cm;
+.body-text{
+    font-size: 2rem;
+}
+
+.body-background{
+    background-color: rgba(50,150,50,0.9);
+}
+
+.img-small{
+    width: 200px;
+    max-width: 100%;
+    height: 200px;
+    max-height: 100%;
 }

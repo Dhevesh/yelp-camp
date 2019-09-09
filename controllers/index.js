@@ -3,11 +3,16 @@ const router = express.Router();
 const passport = require("passport");
 
 const User = require("../models/users");
-const isAuthUser = require("../controllers/user-auth");
+const Campground = require("../models/campgrounds");
 
 // INDEX
 router.get("/",(req,res)=>{
-	res.render("index");
+	Campground.find({}).sort({dateAdded : -1}).exec(function(err, foundCampgrounds){
+		if (!err){
+			res.render("index", {campgrounds : foundCampgrounds});
+		}
+	});
+	
 });
 
 // AUTH ROUTES

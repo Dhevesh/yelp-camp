@@ -10,7 +10,7 @@
 		<title>Yelp! Camp</title>
 	</head>
 	<body>
-		<div>
+		<div class="">
 			<div id="yelp-carousel" class="carousel slide" data-ride="carousel">
 				<div class="carousel-caption">
 					<div class="mb-4">
@@ -19,7 +19,7 @@
 					</div>
 					<div class="">
 						<hr class="carousel-hr">
-						<a class="btn btn-lg btn-success btn-txt" href="/campgrounds"><span><i class="fa fa-tree"></i></span>VIEW CAMPGROUNDS</a>
+						<a class="btn btn-lg btn-success btn-txt" href="/campgrounds"><span><i class="fa fa-tree"></i></span>VIEW ALL CAMPGROUNDS</a>
 					</div>
 				</div>
 				<div class="carousel-inner">
@@ -43,11 +43,16 @@
 				</a>
 			</div>
 		</div>
-		<div class="row mx-0">
-			<div class="container">
-				<div class="col-12">
-					<p>Welcome to Yelp! Camp</p>
-				</div>
+		<div class="container">
+			<div class="body-text text-center">
+				<span>Latest Campgrounds</span>
+			</div>	
+			<div class="d-flex flex-row background rounded p-4 justify-content-center">
+				<% campgrounds.slice(0,5).forEach((campground)=>{ %>
+					<div class="card m-2 shadow-sm">
+						<img class="card-img-top rounded-lg img-small" src="<%=campground.image%>" alt="<%=campground.name%>.png">
+					</div>
+				<% }); %>
 			</div>
 		</div>
 		<% if (logout && logout.length > 0) { %>
