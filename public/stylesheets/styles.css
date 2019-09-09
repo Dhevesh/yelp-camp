@@ -131,7 +131,7 @@
 }
 
 .img-small{
-    object-fit: fill;
+    object-fit: cover;
     height: 12rem;
     /* width: 12rem; */
     max-height: 100%;
