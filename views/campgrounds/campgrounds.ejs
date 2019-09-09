@@ -25,7 +25,7 @@
 								<% for (var i = 0; i < Math.floor(campground.rating) ; i++){ %>
 									<span class="fas fa-star star-rating"></span>
 								<% } %>
-								<% if (campground.rating%2 > 0 ) { %>
+								<% if (campground.rating%2 > 0  && campground.rating != 5) { %>
 									<span class="fas fa-star-half-alt star-rating"></span>
 								<% } %>
 								<% for (var i = (Math.round(campground.rating%2)); i < (5 - Math.floor(campground.rating)); i++){  %>
