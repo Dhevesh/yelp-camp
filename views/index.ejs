@@ -55,21 +55,22 @@
 				</a>
 			</div>
 		</div>
-		<div class="container">
+		<div class="container mt-4">
 			<div class="body-text text-center">
 				<span>Latest Campgrounds</span>
 			</div>	
-			<div class="d-flex flex-row background rounded p-4 justify-content-center">
+			<div class="d-flex flex-row rounded pb-4 justify-content-center">
 				<% campgrounds.slice(0,5).forEach((campground)=>{ %>
 					<div class="card m-2 shadow-sm">
 						<a href="/campgrounds/<%=campground.slug%>"><img class="card-img-top rounded-lg img-small" src="<%=campground.image%>" alt="<%=campground.name%>.png"></a>
 					</div>
 				<% }); %>
 			</div>
+			<hr>
 			<div class="body-text text-center">
 				<span>Top Rated Campgrounds</span>
 			</div>
-			<div class="d-flex flex-row background rounded p-4 justify-content-center">
+			<div class="d-flex flex-row rounded pb-4 justify-content-center">
 			<% topRated.slice(0,5).forEach(function (campground){ %>
 				<div class="card m-2 shadow-sm">
 					<a href="/campgrounds/<%=campground.slug%>"><img class="card-img-top rounded-lg img-small" src="<%=campground.image%>" alt="<%=campground.name%>.png"></a>
