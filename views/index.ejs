@@ -23,15 +23,27 @@
 					</div>
 				</div>
 				<div class="carousel-inner">
-					<div class="carousel-item active" data-interval="5000">
-						<img class="d-block carousel-img" src="https://images.unsplash.com/photo-1464207687429-7505649dae38?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80"  alt="...">
-					</div>
-					<div class="carousel-item" data-interval="5000">
-						<img class="d-block carousel-img" src="https://images.unsplash.com/photo-1505735754789-3404132203ed?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"  alt="...">
-					</div>
-					<div class="carousel-item" data-interval="5000">
-						<img class="d-block carousel-img" src="https://images.unsplash.com/photo-1476041800959-2f6bb412c8ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"  alt="...">
-					</div>
+					<% if (images.length == 0){ %>
+						<div class="carousel-item active" data-interval="5000">
+							<img class="d-block carousel-img" src="https://images.unsplash.com/photo-1464207687429-7505649dae38?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80"  alt="...">
+						</div>
+						<div class="carousel-item" data-interval="5000">
+							<img class="d-block carousel-img" src="https://images.unsplash.com/photo-1505735754789-3404132203ed?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"  alt="...">
+						</div>
+						<div class="carousel-item" data-interval="5000">
+							<img class="d-block carousel-img" src="https://images.unsplash.com/photo-1476041800959-2f6bb412c8ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"  alt="...">
+						</div>
+					<% } else { %>
+						<div class="carousel-item active" data-interval="5000">
+							<img class="d-block carousel-img" src="<%=images[0]%>"  alt="campground.png">
+						</div>
+						<% images.slice(1,5).forEach((image)=>{ %>
+							<div class="carousel-item" data-interval="5000">
+								<img class="d-block carousel-img" src="<%=image%>"  alt="campground.png">
+							</div>
+						<% }); %>
+					<% } %>
+					
 				</div>
 				<a class="carousel-control-prev carousel-control-bg" href="#yelp-carousel" role="button" data-slide="prev">
 					<span aria-hidden="true"><i class="fa fa-chevron-left"></i></span>
@@ -43,16 +55,27 @@
 				</a>
 			</div>
 		</div>
-		<div class="container">
+		<div class="container mt-4">
 			<div class="body-text text-center">
 				<span>Latest Campgrounds</span>
 			</div>	
-			<div class="d-flex flex-row background rounded p-4 justify-content-center">
+			<div class="d-flex flex-row rounded pb-4 justify-content-center">
 				<% campgrounds.slice(0,5).forEach((campground)=>{ %>
 					<div class="card m-2 shadow-sm">
-						<img class="card-img-top rounded-lg img-small" src="<%=campground.image%>" alt="<%=campground.name%>.png">
+						<a href="/campgrounds/<%=campground.slug%>"><img class="card-img-top rounded-lg img-small" src="<%=campground.image%>" alt="<%=campground.name%>.png"></a>
 					</div>
 				<% }); %>
+			</div>
+			<hr>
+			<div class="body-text text-center">
+				<span>Top Rated Campgrounds</span>
+			</div>
+			<div class="d-flex flex-row rounded pb-4 justify-content-center">
+			<% topRated.slice(0,5).forEach(function (campground){ %>
+				<div class="card m-2 shadow-sm">
+					<a href="/campgrounds/<%=campground.slug%>"><img class="card-img-top rounded-lg img-small" src="<%=campground.image%>" alt="<%=campground.name%>.png"></a>
+				</div>
+			<% }); %>
 			</div>
 		</div>
 		<% if (logout && logout.length > 0) { %>
