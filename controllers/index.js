@@ -10,10 +10,13 @@ router.get("/",(req,res)=>{
 	Campground.find({}).sort({dateAdded : -1}).exec(function(err, foundCampgrounds){
 		if (!err){
 			var images = [];
+			var topRated = [];
 			foundCampgrounds.forEach((campground)=>{
 				images.push(campground.image);
+				topRated.push(campground); // currently returns all rating. could be changed to only return rating of a certain value eg. only 4 or 5 star campgrounds
 			});
-			res.render("index", {campgrounds : foundCampgrounds, images : images});
+			topRated.sort((a,b)=>(a.rating > b.rating)?-1:1);
+			res.render("index", {campgrounds : foundCampgrounds, images : images, topRated : topRated});
 		}
 	});
 	
