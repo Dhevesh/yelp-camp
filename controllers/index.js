@@ -33,6 +33,7 @@ router.post("/register",(req,res)=>{
 		if (!err) {
 			passport.authenticate("local")(req, res, ()=>{
 				req.flash("success", "Welcome to Yelp Camp! " + user.username);
+				req.session.redirect = req.originalUrl;
 				res.redirect("/user/"+user._id+"/edit");
 			});
 		} else {

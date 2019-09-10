@@ -23,7 +23,9 @@ router.get("/:id", (req, res)=>{
 router.get("/:id/edit", isAuthUser.isUserProfile, (req, res)=>{
     user.findById(req.params.id, (err, foundUser)=>{
         if (!err){
-            res.render("profile/edit", {user: foundUser});
+            var getUrl = req.session.redirect;
+            delete req.session.redirect;
+            res.render("profile/edit", {user: foundUser, url : getUrl});
         }
     });
 });

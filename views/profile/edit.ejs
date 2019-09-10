@@ -1,5 +1,4 @@
 <% include ../partials/header%>
-
 <div class="form-wide form-wide-long form-align">
     <div class="form-title form-title-text">
         <span>Update your profile details</span>
@@ -72,9 +71,10 @@
             <label for="interests">My Interests (Max 250 chars)</label>
             <textarea class="form-control" name="profile[interests]" id="interests" cols="30" rows="2" maxlength="250" placeholder="interest1, interest2..."><%=user.interests%></textarea>
         </div>
-            <% if (!currentUser.fName){ %>
+            <% if (url){ %>
                 <div class="input-group mb-3">
                     <button class="btn btn-block btn-success">Create Profile</button>
+                    <a href="/campgrounds">Do this later?</a>
                 </div>
             <% } else { %>
             <div class="input-group mb-3">
