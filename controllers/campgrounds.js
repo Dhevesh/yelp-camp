@@ -93,17 +93,27 @@ router.put("/:slug", isAuthUser.isCampAuth, (req,res)=>{
 
 // DELETE ROUTE
 router.delete("/:slug/delete", isAuthUser.isCampAuth, (req,res)=>{
-	Campground.findOneAndDelete({slug : req.params.slug}, (err, campground)=>{
+	Campground.findOne({slug : req.params.slug}).populate("reviews").exec((err, campground)=>{
 		if (!err){
 			User.findOne({_id: campground.author.id}, (err, foundUser)=>{
 				if (!err){
 					var foundPost = foundUser.posts.some(function (postId) {
 						return postId.equals(campground._id);
 					});
+					if(campground.reviews.length !=0){
+					var foundReviewId;
+					campground.reviews.some(function(review){
+						if (review.author.id.equals(foundUser._id)){
+							foundReviewId = review._id;
+							foundUser.reviews.pull(foundReviewId);
+						}
+					});
+					}
 					if (foundPost){
 						foundUser.posts.pull(campground._id);
-						foundUser.save();
 					}
+					foundUser.save();
+					campground.remove();
 					res.redirect("/campgrounds");
 				} else{
 					res.redirect("/campgrounds");

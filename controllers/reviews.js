@@ -25,7 +25,8 @@ router.post("/",isAuthUser.isUniqueReview,(req,res)=>{
 			Review.create(req.body.review, (err, newReview)=>{
 				if (!err){
                     newReview.author.id = req.user._id;
-                    newReview.author.name = req.user.alias;
+					newReview.author.name = req.user.alias;
+					newReview.campground.id = foundCampground._id;
                     newReview.save();
 					foundCampground.reviews.push(newReview);
 					foundCampground.rating = calculateAverage(foundCampground.reviews);
