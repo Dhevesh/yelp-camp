@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+const User = require("../models/users");
+
 const Schema = mongoose.Schema;
 
 const reviewSchema = new Schema({
@@ -13,4 +15,6 @@ const reviewSchema = new Schema({
     dateUpdated: Date
 });
 
-module.exports = mongoose.model("Review", reviewSchema);
+var Review = mongoose.model("Review", reviewSchema);
+
+module.exports = Review;

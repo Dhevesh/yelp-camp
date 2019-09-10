@@ -90,7 +90,7 @@ router.delete("/:review_id", isAuthUser.isReviewAuth, (req, res)=>{
 					foundCampground.reviews.pull(deletedReview.id);
 					foundCampground.rating = calculateAverage(foundCampground.reviews);
 					foundCampground.save();
-					User.findById(req.user._id, (err, foundUser)=>{
+					User.findOne({_id : deletedReview.author.id} , (err, foundUser)=>{
 						if (!err){
 							foundUser.reviews.pull(deletedReview.id);
 							foundUser.save();

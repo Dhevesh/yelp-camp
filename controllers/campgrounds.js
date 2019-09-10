@@ -93,18 +93,17 @@ router.put("/:slug", isAuthUser.isCampAuth, (req,res)=>{
 
 // DELETE ROUTE
 router.delete("/:slug/delete", isAuthUser.isCampAuth, (req,res)=>{
-	Campground.findOne({slug : req.params.slug}, (err, campground)=>{
+	Campground.findOneAndDelete({slug : req.params.slug}, (err, campground)=>{
 		if (!err){
-			User.findById(req.user._id, (err, foundUser)=>{
+			User.findOne({_id: campground.author.id}, (err, foundUser)=>{
 				if (!err){
 					var foundPost = foundUser.posts.some(function (postId) {
-						return postId.equals(campground.slug);
+						return postId.equals(campground._id);
 					});
 					if (foundPost){
-						foundUser.posts.pull(campground._id); //NEEDS TO BE REFACTORED TO ACCOUNT FOR ADMIN USER DELETING THE POST
+						foundUser.posts.pull(campground._id);
+						foundUser.save();
 					}
-					foundUser.save();
-					campground.remove();
 					res.redirect("/campgrounds");
 				} else{
 					res.redirect("/campgrounds");

@@ -17,7 +17,7 @@
 				<img class="card-img-top img-medium" src="<%=campground.image%>">
 				<div class="card-header bg-white">
 					<span class="card-head-text pr-2"><%=campground.name%></span>
-					<% if(currentUser && campground.author.id.equals(currentUser._id) || currentUser && currentUser.userRole == "admin"){ %>
+					<% if(currentUser && campground.author.id.equals(currentUser._id) || currentUser && currentUser.role == "admin"){ %>
 						<a href="/campgrounds/<%=campground.slug%>/edit"><span><i class="far fa-edit"></i></span></a>
 						<form class="delete-form" action="/campgrounds/<%=campground.slug%>/delete?_method=DELETE" method="POST">
 							<button><span><i class="far fa-trash-alt"></i></span></button>

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
-const Comment = require('../models/comments');
+const User = require("../models/users");
+const Review = require("../models/reviews");
 
 // SCHEMA SETUP
 const campgroundSchema = new mongoose.Schema({
@@ -52,9 +53,9 @@ campgroundSchema.pre('save', async function(next) {
 
 campgroundSchema.pre('remove', async function(next) {
 	try{
-		await Comment.remove({
+		await Review.remove({
 			_id: {
-				$in: this.comments
+				$in: this.reviews
 			}
 		});
 		next();
@@ -63,6 +64,7 @@ campgroundSchema.pre('remove', async function(next) {
 		next(err);
 	}
 });
+
 
 var Campground = mongoose.model("Campground", campgroundSchema);
 module.exports = Campground;
