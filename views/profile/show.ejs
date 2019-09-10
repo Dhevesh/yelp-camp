@@ -63,8 +63,17 @@
                             <div class="col-12">
                                 <div class="card rounded-0 mt-2 mb-2 shadow-sm">
                                     <div class="card-header bg-white">
-                                        <h5 class="card-title"><a href="/campgrounds/<%=post.slug%>"><%=post.name%></a></h5>
-                                        <span><%=moment(post.dateAdded).format("MMM YYYY")%></span>
+                                        <span class="card-head-text pr-2"> <a href="/campgrounds/<%=post.slug%>"><%=post.name%></a> </span>
+                                            <% if(currentUser && post.author.id.equals(currentUser._id) || currentUser && currentUser.role == "admin"){ %>
+                                                <a href="/campgrounds/<%=post.slug%>/edit"><span><i class="far fa-edit"></i></span></a>
+                                                <form class="delete-form" action="/campgrounds/<%=post.slug%>/delete?_method=DELETE" method="POST">
+                                                    <button><span><i class="far fa-trash-alt"></i></span></button>
+                                                </form>
+                                            <% } %>
+                                        <div>
+                                            <span><%=moment(post.dateAdded).format("MMM YYYY")%></span>
+                                        </div>
+                                        
                                     </div>
                                     <img class="card-img-top img-medium rounded-0" src="<%=post.image%>" alt="post.png">
                                     <div class="card-footer bg-white">
