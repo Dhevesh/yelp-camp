@@ -31,11 +31,18 @@ router.get("/register",(req,res)=>{
 router.post("/register",(req,res)=>{
 	User.register(new User({username: req.body.username}), req.body.password, (err,user)=>{
 		if (!err) {
-			passport.authenticate("local")(req, res, ()=>{
-				req.flash("success", "Welcome to Yelp Camp! " + user.username);
-				req.session.redirect = req.originalUrl;
-				res.redirect("/user/"+user._id+"/edit");
-			});
+			User.findOneAndUpdate({_id : user._id}, req.body.profile, { new : true }, function(err, foundUser){
+				if (!err){	
+				passport.authenticate("local")(req, res, ()=>{
+					req.flash("success", "Welcome to Yelp Camp! " + foundUser.alias);
+					req.session.redirect = req.originalUrl;
+					res.redirect("/user/"+user._id+"/edit");
+				});
+			} else {
+				return res.redirect("/register");
+			}
+			})
+			
 		} else {
 			req.flash("error", err.message);
 			return res.redirect("/register");

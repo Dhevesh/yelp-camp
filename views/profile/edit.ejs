@@ -4,24 +4,7 @@
         <span>Update your profile details</span>
     </div>
     <form action="/user/<%=user._id%>/edit?_method=PUT" method="POST" class="form">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">First Name</span>
-            </div>
-            <input class="form-control" type="text" name="profile[fName]" value="<%=user.fName%>" placeholder="first name" required>
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Last Name</span>
-            </div>
-            <input class="form-control" type="text" name="profile[lName]" value="<%=user.lName%>" placeholder="last name" required>
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Alias</span>
-            </div>
-            <input class="form-control" type="text" name="profile[alias]" value="<%=user.alias%>" placeholder="will be shown as your user tag" required>
-        </div>
+        
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text">Date of Birth</span>
@@ -74,8 +57,8 @@
             <% if (url){ %>
                 <div class="input-group mb-3">
                     <button class="btn btn-block btn-success">Create Profile</button>
-                    <a href="/campgrounds">Do this later?</a>
                 </div>
+                <div><a href="/campgrounds">Do this later?</a></div>
             <% } else { %>
             <div class="input-group mb-3">
                 <button class="btn btn-block btn-success">Update Profile</button>
