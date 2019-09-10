@@ -72,11 +72,16 @@
             <label for="interests">My Interests (Max 250 chars)</label>
             <textarea class="form-control" name="profile[interests]" id="interests" cols="30" rows="2" maxlength="250" placeholder="interest1, interest2..."><%=user.interests%></textarea>
         </div>
-        <div class="input-group mb-3">
-            <button class="btn btn-block btn-success">Update Profile</button>
-        </div>
-        <div><a href="/user/<%=user._id%>">Go Back</a></div>
-        
+            <% if (!currentUser.fName){ %>
+                <div class="input-group mb-3">
+                    <button class="btn btn-block btn-success">Create Profile</button>
+                </div>
+            <% } else { %>
+            <div class="input-group mb-3">
+                <button class="btn btn-block btn-success">Update Profile</button>
+            </div>
+            <div><a href="/user/<%=user._id%>">Go Back</a></div>
+            <% } %>
     </form>
 </div>
 
