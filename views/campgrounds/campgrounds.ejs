@@ -14,17 +14,17 @@
 	<div class="container">
 		<%campground.forEach((campground)=>{%>
 			<div class="row">
-				<div class="col-4 pb-2">
+				<div class="col-sm-12 col-md-4 pb-2 order-1">
 					<a href="/campgrounds/<%=campground.slug%>"><img class="card-img-top img-small" src="<%=campground.image%>" alt="image.png"></a>
 				</div>
-				<div class="col-4 pb-2">
+				<div class="col-sm-12 col-md-4 pb-2 order-sm-3 order-md-2">
 					<div class="">
 						<h5 class="card-head-text font-sm font-md"><%=campground.name%></h5>	
 					</div>
 					<p class="card-text mb-0 pb-0" style="white-space: pre-line"><%=campground.description.substring(0,100)%>...</p>
 					<a href="/campgrounds/<%=campground.slug%>">continue reading</a>
 				</div>
-				<div class="col-4 pb-2">
+				<div class="col-sm-12 col-md-4 pb-2 order-sm-2 order-md-3">
 					<div>
 						<% for (var i = 0; i < Math.floor(campground.rating) ; i++){ %>
 							<span class="fas fa-star star-rating"></span>

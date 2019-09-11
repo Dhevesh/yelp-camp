@@ -1,7 +1,7 @@
 <%include ../partials/header%>
 <div class="container pt-4">
 	<div class="row">
-		<div class="col-3">
+		<div class="col-sm-12 col-md-3">
 			<div class="list-group">
 				<li class="list-group-item"><span><i class="fas fa-globe"></i></span></li>
 				<li class="list-group-item"><span><i class="fas fa-map-marked-alt"></i></span></li>
@@ -12,7 +12,7 @@
 				<span class="time">Submitted by : <a href="/user/<%=campground.author.id%>"><%=campground.author.name%></a></span><span></span><span class="time"> - <%=moment(campground.dateAdded).fromNow()%></span>
 			</div>
 		</div>
-		<div class="col-6">
+		<div class="col-sm-12 col-md-6">
 			<div class="card mb-4">
 				<img class="card-img-top img-medium" src="<%=campground.image%>">
 				<div class="card-header bg-white">
