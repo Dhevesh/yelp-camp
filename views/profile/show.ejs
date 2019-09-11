@@ -14,7 +14,7 @@
             <%}%>
             <div class=profile-head-image>
                 <img class="profile-image img-thumbnail" src="<%=user.profilePicUrl %>" alt="image.png">
-                <span class="d-flex d-inline-flex profile-head-text pl-2"><%=user.fName%> <%=user.lName%></span>
+                <span class="d-flex d-inline-flex profile-head-text pl-2"><%=user.alias%></span>
             </div>
         </div>
         <div class="profile-footer shadow-sm">
@@ -25,7 +25,7 @@
                 <% } %>
             </div>
     <div class="row">
-        <div class="col-4">
+        <div class="col-12 col-md-4">
             <div class="card mt-2 shadow-sm">
                 <div class="card-body">
                     <div>
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-12 col-md-6">
             <% if (user.posts.length === 0){ %>
                 <div class="mt-2">
                     <span>User has no posts yet.</span>
