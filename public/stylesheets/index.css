@@ -53,8 +53,8 @@
 }
 
 .carousel-control-prev, .carousel-control-next{
-    width: 150px;
-    max-width: 10%;
+    width: 75px;
+    max-width: 5%;
 }
 
 .fa-chevron-left, .fa-chevron-right{
@@ -197,8 +197,8 @@ a:hover i.fa-tree{
     }
 
     .carousel-control-prev, .carousel-control-next{
-        width: 200px;
-        max-width: 10%;
+        width: 100px;
+        max-width: 5%;
     }
     
     .fa-chevron-left, .fa-chevron-right{
